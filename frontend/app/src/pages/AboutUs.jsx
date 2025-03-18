@@ -3,26 +3,26 @@ import './css/AboutUs-icon.css'
 import './css/AboutUs.css'
 
 const AboutUs = () => {
-    const [selectedTab, setSelectedTab] = useState<string>('challenge')
-    const [isShowMilestone0, setIsShowMileStone0] = useState<boolean>(false)
-    const [isShowMilestone1, setIsShowMileStone1] = useState<boolean>(false)
-    const [isShowMilestone2, setIsShowMileStone2] = useState<boolean>(false)
-    const [isShowMilestone3, setIsShowMileStone3] = useState<boolean>(false)
+    const [selectedTab, setSelectedTab] = useState('challenge')
+    const [isShowMilestone0, setIsShowMileStone0] = useState(false)
+    const [isShowMilestone1, setIsShowMileStone1] = useState(false)
+    const [isShowMilestone2, setIsShowMileStone2] = useState(false)
+    const [isShowMilestone3, setIsShowMileStone3] = useState(false)
 
-    const targetSection = useRef<HTMLDivElement | null>(null)
+    const targetSection = useRef(null)
 
     const scrollDown = () => {
         if(targetSection.current) targetSection.current.scrollIntoView({behavior: "smooth"})
     }
 
-    const handleShowMilestone = (index: number) => {
+    const handleShowMilestone = (index) => {
         if(index === 0) setIsShowMileStone0(!isShowMilestone0)
         else if (index === 1) setIsShowMileStone1(!isShowMilestone1)
         else if (index === 2) setIsShowMileStone2(!isShowMilestone2)
         else setIsShowMileStone3(!isShowMilestone3)
     }
 
-    const handleTabClick = (event: React.MouseEvent<HTMLAnchorElement>, tab: string) =>{
+    const handleTabClick = (event, tab) =>{
         event.preventDefault();
         setSelectedTab(tab)
     }

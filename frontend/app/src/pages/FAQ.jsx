@@ -2,20 +2,19 @@ import { useEffect, useRef, useState } from "react"
 import "./css/FAQ-icon.css"
 import "./css/FAQ.css"
 import userImage from "../assets/user.jpg"
-import { FAQDto } from "../../../../../frontend/VNG/src/dtos/Faq.dto"
 import listFAQ from "../mockups/FAQ"
 
 
 const FAQ = () => {
-    const [filterState, setFilterState] = useState<string>("all")
-    const [faqs, setFaqs] = useState<FAQDto[]>([])
-    const [openedAnswers, setOpenedAnswers] = useState<number[]>([]);
-    const targetSection = useRef<HTMLDivElement | null>(null)
+    const [filterState, setFilterState] = useState("all")
+    const [faqs, setFaqs] = useState([])
+    const [openedAnswers, setOpenedAnswers] = useState([]);
+    const targetSection = useRef(null)
     const scrollDown = () => {
         if(targetSection.current) targetSection.current.scrollIntoView({behavior: "smooth"})
     }
 
-    const toggleAnswer = (index: number) => {
+    const toggleAnswer = (index) => {
         if (!openedAnswers.includes(index)) {
             setOpenedAnswers([...openedAnswers, index]);
         } else{
@@ -24,7 +23,7 @@ const FAQ = () => {
     };
 
 
-    const timeAgo = (date: Date): string => {
+    const timeAgo = (date) => {
         const now = new Date();
         const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
     
