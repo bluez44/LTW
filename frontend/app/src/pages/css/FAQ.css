@@ -1,0 +1,533 @@
+@keyframes downto {
+    0% {
+        transform: translateY(0%);
+    }
+    
+    50% {
+        transform: translateY(10%);
+    }
+}
+
+p{
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 100px;
+    line-height: 120px;
+    color: #fff;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+.banner{
+    margin-bottom: 40px;
+    position: relative;
+    height: auto;
+    margin-top: 64px;
+    display: block;
+}
+
+.banner-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.banner-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    box-sizing: content-box;
+}
+
+.banner-slide{
+    flex-shrink: 0;
+    width: 1268px;
+    height: 100%;
+    position: relative;
+}
+
+.banner-slide::before{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    content: "";
+    display: block;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 28.65%, rgba(0, 0, 0, 0.5) 82.81%);
+    z-index: 1;
+}
+
+.banner-slide > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.banner-slide > h2{
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 80px;
+    left: calc((100vw - 1200px) / 2 + 100px);
+    bottom: 60px;
+    z-index: 1;
+    margin-block-end: 0px;
+    margin-block-start: 0px;
+}
+
+.banner-info{
+    height: auto;
+    padding: 25px 75px 40px 35px;
+    width: 450px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    left: calc((100vw - 1000px) / 2);
+    top: 20%;
+    opacity: 1;
+}
+
+.banner-info > div{
+    position: relative;
+}
+
+.banner-info > div > a{
+    font-weight: bold;
+    font-size: 46px;
+    line-height: 55px;
+    color: #4d4d4d;
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.banner-info > div > p{
+    font-size: 30px;
+    line-height: 34px;
+    color: #4d4d4d;
+}
+
+.scroll-down{
+    position: absolute;
+    right: 40px;
+    margin: auto;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    animation: downto .5s infinite;
+    z-index: 1;
+}
+
+.faq{
+    margin-bottom: 70px;
+    position: relative;
+    display: block;
+    height: auto;
+    width: 95%;
+    padding: 25px;
+    margin: 10px;
+    border-radius: 25px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.option-bar{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.filter-option, .search-option{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-option > input {
+    width: 70%;
+    height: 40px;
+    border-radius: 25px;
+    color: black;
+    font-size: 18px;
+    padding-left: 15px;
+    border: 2px solid #eb5a26;
+}
+
+.search-option > svg{
+    width: 25px;
+    position: absolute;
+    right: 62.5vw;
+}
+
+.search-option > input:focus {
+    border-color: #732104;
+    outline: none;
+}
+
+.search-option > input::placeholder {
+    color: gray;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.faq-number-mobile, .search-option > p{
+    margin-left: 10px;
+    font-size: 18px;
+    color: gray;
+    font-style: italic;
+}
+
+.faq-number-mobile{
+    display: none;
+}
+
+.filter-option{
+    justify-content: end;
+ }
+
+.filter-wrapper{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border-radius: 25px;
+    background-color: #f2eded;
+    padding: 5px 15px;
+}
+
+.filter-wrapper > a{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.filter-wrapper > a:hover{
+    background-color: #eb5a26;
+    color: white;
+}
+
+.filter-option-active{
+    background-color: #eb5a26;
+    color: white;
+}
+
+.faq-container{
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.faq-info-container{
+    display: flex;
+}
+
+.faq-info{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.faq-info > div > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+
+.username-time{
+    margin-left: 10px;
+}
+
+.username-question{
+    font-size: 18px;
+}
+
+.time-question{
+    font-size: 14px;
+}
+
+.username-answer{
+    font-size: 17px;
+}
+
+.time-answer{
+    font-size: 14px;
+}
+
+.question-tittle{
+    font-size: 22px;
+    margin-block-end: 10px !important;
+}
+
+.question-content{
+    font-size: 20px;
+}
+
+.faq-content > p{
+    margin-block-end: 10px;
+}
+
+.faq-answer{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.answer-btn{
+    color: #eb5a26;
+    border: 1px solid #eb5a26;
+    background-color: white;
+    border-radius: 3px;
+    margin-left: 20px;
+    padding: 5px 15px;
+    font-size: 16px;
+}
+
+.answer-btn:hover{
+    color: white;
+    background-color: #eb5a26;
+    border: 1px solid white;
+}
+
+.answer-btn:active{
+    scale: 90%;
+}
+
+.more{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.more-btn{
+    color: gray;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    font-style: italic;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.more-btn:hover{
+    background-color: gray;
+    color: white;
+}
+
+.more-btn:active{
+    scale: 90%;
+}
+
+.answer-section{
+    padding: 0px 20px;    
+}
+
+.answer-info{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.answer-info > img{
+    width: 40px;
+    border-radius: 25px;
+}
+
+.answer-container{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgb(244, 239, 239);
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+}
+
+.answer-input{
+    margin-top: 20px;
+}
+
+.answer-input > textarea{
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+
+@media (max-width: 1050px) {
+    .scroll-down{
+        display: none;
+    }
+    
+    .banner-slide{
+        width: 100vw;
+    }
+
+    .banner-slide > h2{
+        left: 50px;
+        font-size: 40px;
+        line-height: 48px;
+        bottom: 30px;
+        max-width: 70%;
+    }
+
+    .banner-info{
+        height: fit-content;
+        padding: 25px 75px 40px 35px;
+        width: 30%;
+        top: 0;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .banner-info > div > a{
+        font-size: 22px;
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+
+    .banner-info > div > p{
+        font-size: 18px;
+        line-height: 16px;
+    }
+
+    .faq{
+        width: 90%;
+    }
+
+    .question-tittle{
+        font-size: 20px;
+    }
+
+    .question-content{
+        font-size: 18px;
+    }
+
+    .answer-input > textarea{
+        font-size: 16px;
+    }
+
+    .search-option > input::placeholder {
+        font-size: 16px;
+    }
+
+    .search-option > svg{
+        right: 59vw;
+    }
+
+    .filter-wrapper > a{
+        font-size: 15px;
+    }
+
+    .faq-number{
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .banner-info{
+        width: 50%;
+        padding: 25px 75px 30px 25px;
+    }
+
+    .banner-slide {
+        width: 100vw; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .banner-slide > h2{
+        font-size: 36px;
+    }
+
+    .banner-slide > img{
+        width: 760px;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .option-bar{
+        flex-direction: column;
+    }
+
+    .search-option > p{
+        display: none;
+    }
+
+    .faq-number-mobile{
+        display: block;
+        margin-block-start: 10px;
+    }
+
+    .search-option > input{
+        width: 96%;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .search-option > svg{
+        width: 20px;
+        right: 6vw;
+    }
+
+
+    .filter-option{
+        justify-content: start;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    .filter-wrapper{
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .filter-wrapper > a{
+        padding: 10px 20px;
+    }
+
+    .username-question{
+        font-size: 17px;
+    }
+
+    .question-tittle{
+        font-size: 18px;
+    }
+
+    .question-content{
+        font-size: 16px;
+    }
+
+    .answer-container > p{
+        font-size: 16px;
+    }
+
+    .answer-input > textarea{
+        font-size: 15px;
+    }
+
+    .faq-answer{
+        justify-content: space-between;
+    }
+}
