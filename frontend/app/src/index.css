@@ -1,6 +1,9 @@
 :root {
+  --vng-navbar: #4d4d4d;
   --vng-primary: #e65a26;
-  --vng-text: #EB5A26;
+  --vng-secondary: #eb5a26;
+  --vng-third: #ed7c2b;
+  --vng-text: #808080;
 }
 
 * {
@@ -10,9 +13,8 @@
   font-family: sans-serif;
 }
 
-ul,p {
+ul,
+p {
   margin: 0;
   padding: 0;
 }
-
-

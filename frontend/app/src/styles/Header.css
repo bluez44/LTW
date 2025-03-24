@@ -1,22 +1,22 @@
 .nav_bar {
-    height: 81px;
+  height: 81px;
 }
 
-.nav_bar a:hover {
-    background-color: var(--vng-primary);
-    color: #fff !important;
-    transition: all .3s;
+.nav_bar ul a:hover {
+  background-color: var(--vng-primary);
+  color: #fff !important;
+  transition: all 0.3s;
 }
 
 .nav_bar a.active::after {
-    content: "";
-    position: relative;
-    top: 30%;
-    left: -50%;
-    transform: translateX(50%) translateY(-50%);
-    display: block;
-    width: 7px;
-    height: 7px;
-    background-color: var(--vng-primary);
-    border-radius: 50%;
+  content: '';
+  position: relative;
+  top: 30%;
+  left: -50%;
+  transform: translateX(50%) translateY(-50%);
+  display: block;
+  width: 7px;
+  height: 7px;
+  background-color: var(--vng-primary);
+  border-radius: 50%;
 }
