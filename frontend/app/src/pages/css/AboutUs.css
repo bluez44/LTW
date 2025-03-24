@@ -116,7 +116,7 @@ a{
     border-radius: 25px;
 }
 
-.active, .choose-tab:hover{
+.list-tab .active, .choose-tab:hover{
     color: #fff;
     background: #ed5a26;
     border-radius: 25px 25px 0 0;

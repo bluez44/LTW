@@ -9,7 +9,7 @@ function Layout() {
     <div className="min-vh-100 d-flex flex-column">
       <Header />
 
-      <main className="position-relative z-0 flex-grow-1 flex-shrink-1" style={{ paddingTop: '81px' }}>
+      <main className="position-relative z-0 flex-grow-1 flex-shrink-1" style={{ padding: '81px 0 81px 0' }}>
         <Outlet />
       </main>
 

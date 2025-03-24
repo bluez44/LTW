@@ -1,5 +1,5 @@
 .nav_bar {
-  height: 81px;
+  height: 81px !important;
 }
 
 .nav_bar ul a:hover {
@@ -8,7 +8,7 @@
   transition: all 0.3s;
 }
 
-.nav_bar a.active::after {
+.nav_bar .active::after {
   content: '';
   position: relative;
   top: 30%;
