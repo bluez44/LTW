@@ -1,0 +1,663 @@
+@keyframes downto {
+    0% {
+        transform: translateY(0%);
+    }
+    
+    50% {
+        transform: translateY(10%);
+    }
+}
+
+
+h4,h6,h3,p{
+    margin-block-start: 0em !important;
+    margin-block-end: 0em !important;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    color: #4d4d4d;
+    max-width: 720px;
+}
+
+h4{
+    font-size: 24px;
+    color: #eb5a26;
+}
+
+h6 {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container{
+    width: 100%;
+    height: 100%; 
+}
+
+.top-content{
+    padding: 55px 75px 55px 35px;
+    position:absolute;
+    top: 10%;
+    left: 16%; 
+    width: auto;
+    height: auto; 
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+
+.top-content a{
+    color: white;
+    font-size: 46px;
+}
+
+.cores-value{
+    margin-bottom: 65px;
+    height: auto;
+    position: relative;
+}
+
+.container-1{
+    width: 1200px;
+    margin: auto;
+    position: relative;
+}
+
+.container-1 > h4{
+    margin-block-end: 25px !important;
+}
+
+.container-1 > h3{
+    font-size: 36px;
+    margin-block-start: 0px !important;
+    
+}
+
+.container-1 > p{
+    margin-block-end: 45px !important;
+    color: gray;
+}
+
+.list-tab{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    gap: 20px;
+}
+
+.choose-tab{
+    width: 370px;
+    height: 90px;
+    display: flex;
+    padding-top: 25px;
+    padding-right: 20px;
+    padding-bottom: 25px;
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #eb5a26;
+    background-color: white;
+    border: 1px solid #eb5a26;
+    border-radius: 25px;
+}
+
+.active, .choose-tab:hover{
+    color: #fff;
+    background: #ed5a26;
+    border-radius: 25px 25px 0 0;
+    height: 110px;
+}
+
+.frame-content{
+    padding: 55px 40px 55px 58px;
+    border: 1px solid #eb5a26;
+    border-radius: 0 0 25px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame-content > p{
+    font-size: 18px;
+    line-height: 1.75;
+    max-width: 750px;
+}
+
+.frame-content > svg{
+    margin-left: 20px;
+}
+
+.integrity-svg,.pertnership-svg, .challenge-svg{
+    height: 130px;
+    width: 280px;
+}
+
+.challenge-svg{
+    margin-right: 20px;
+}
+
+.milestone{
+    padding-top: 0px;
+    margin-bottom: 65px;
+    position: relative;
+    display: block;
+}
+
+.milestone-content{
+    width: 870px;
+    max-height: 180px;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out;
+}
+
+.show-milestone{
+    max-height: 1700px !important;
+}
+
+.show-milestone-background{
+    background-color: #f2f2f2 !important;
+}
+
+.container-2{
+    width: 1200px;
+    margin: auto;
+    position: relative;
+}
+
+.content-2 > div > div img{
+    height: 180px;
+    width: 210px;
+    margin-right: 30px;
+    border-radius: 25px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.milestone-h4{
+    margin-block-end: 1.33em !important;
+}
+
+.content-2 > div > div a{
+    padding: 5px 15px;
+    display: inline-block;
+    margin-top: 5px;
+    border: .5px solid #bdbdbd;
+    border-radius: 25px;
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #bdbdbd;
+}
+
+.content-2 > div > div a:hover{
+    color: #fff;
+    background: #bdbdbd;
+}
+
+.content-2 > div > div p{
+    color: #4d4d4d;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.content-2-wrapper{
+    position: relative;
+    justify-content: space-between;
+    width: 1140px;
+    padding: 25px;
+    margin-left: 45px;
+    border-radius: 25px;
+    
+}
+
+.content-2-wrapper::before{
+    border: 1px solid #cacaca;
+    width: 0px;
+    content: "";
+    background: #cacaca;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% + 30px);
+    box-sizing: inherit;
+}
+
+.content-2-wrapper::after{
+    background: #eb5a26;
+    content: "";
+    display: block;
+    position:absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    box-sizing: inherit;
+    left: -6px;
+    top: 30px
+}
+
+.arrow::before{
+    background-image: url('https://corp.vcdn.vn/products/vng/skin-2021-update/dist/main/images/_sprites-layout.png');
+    background-position: -167px -149px;
+    width: 15px;
+    height: 10px;
+    content: "";
+    display: block;
+    position: absolute;
+    left: -6px;
+    top: 0;
+    box-sizing: inherit;
+}
+
+.milestone-point{
+    display: flex;
+    padding: 25px;
+    width: 1140px;
+    border-radius: 25px;
+}
+
+.manager{
+    margin-bottom: 65px;
+    position: relative;
+    display: block;
+}
+
+.content-3{
+    width: 1200px;
+    margin: auto;
+    position: relative;
+    display: block;
+}
+
+.content-3 > h4{
+    margin-block-end: 25px !important;
+}
+
+.person-list{
+    display: grid;
+    grid-gap: 40px 30px;
+    grid-template-columns: 380px 380px 380px;
+    width: 1200px;
+    position: relative;
+}
+
+.person-item{
+    height: 470px;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    border-right: 1px solid rgba(0, 0, 0, .2);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    box-sizing: border-box;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .04);
+    position: relative
+}
+
+.person-item:hover::after{
+    background-color: #ed5a26;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .04);
+}
+
+.person-img {
+    border-radius: 25px 25px 0px 0px;
+    background-color: #c4c4c4;
+    overflow: hidden;
+    position: relative;
+}
+
+.person-img > img{
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.person-infor{
+    height: auto;
+    text-align: center;
+    padding: 40px 20px 0px 20px;
+    background-color: white;
+}
+
+.person-item::after{
+    transition: .3s linear;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    z-index: -1;
+    border-radius: 35px;
+    height: 480px;
+}
+
+.person-infor > p{
+    font-size: 16px;
+    margin-block-start: 8px !important;
+    line-height: 19px;
+    color: gray;
+}
+
+
+.btn-scroll-down{
+    position: absolute;
+    right: calc((100vw - 1200px) / 2);
+    margin: auto;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+    animation: downto .5s infinite;
+}
+
+.btn-scroll-down:hover circle{
+    fill: rgba(0, 0, 0, .8);
+}
+
+.banner{
+    height: auto;
+    margin-bottom: 70px;
+    position: relative;
+    display: block;
+    margin-top: 64px;
+}
+
+.banner-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.banner-wrapper{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+}
+
+.banner-slide{
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+}
+
+.desktop{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mobile{
+    display: none;
+}
+
+@media (max-width: 1050px) {
+    .desktop{
+        display: none;
+    }
+
+    .mobile{
+        display: flex;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .banner > p{
+        display: none;
+    }
+
+    .top-content{
+        position: relative;
+        left: unset;
+        top: unset;
+        border-radius: 0;
+        padding: 0;
+    }
+
+    .top-content > div{
+        background-color: #eb5a26;
+        padding: 25px 16px;
+    }
+
+    .top-content h4{
+        margin-block-end: 15px !important;
+        color: white;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .top-content a{
+        font-size: 16px;
+        line-height: 19px;
+        color: white;
+        max-width: 660px;
+        display: block;
+        list-style: none;
+    }
+    .top-content br{
+        display: none;
+    }
+
+    .cores-value{
+        margin-bottom: 40px;
+        height: auto;
+        padding: 0px;
+    }
+
+    .container-1{
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .container-1 > h4,h3{
+        margin-block-end: 10px !important;
+    }
+
+    .container-1 > h3{
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .container-1 > p{
+        margin-block-end: 20px;
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    .choose-tab{
+        width: calc(33.3333% - 10px);
+        padding: 25px 20px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .frame-content{
+        padding: 0px;
+        flex-direction: column;
+        padding: 25px 15px;
+    }
+
+    .frame-content > p{
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .milestone{
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .milestone-h4{
+        margin-block-end: 10px !important;
+    }
+
+    .milestone-point{
+        margin-left: 20px;
+        margin-left: 20px;
+        width: calc(100vw - 110px); 
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .milestone-content{
+        width: 100%;
+    }
+
+    .milestone-content > h3{
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .managers{
+        margin-bottom: 40px;
+        padding: 0;
+    }
+
+    .content-3{
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .content-3 > h4{
+        margin-block-end: 20px !important;
+    }
+
+    .person-list{
+        grid-gap: 20px 15px;
+        grid-template-columns: calc((100% - 50px) / 2) calc((100% - 50px) / 2);
+        width: 100%;
+    }
+
+    .person-item{
+        width: 100%;
+        height: auto;
+        content: none;
+    }
+
+    .content-2-wrapper{
+        width: 90vw; 
+        margin-left: 0px;
+    }
+
+    .container-2{
+        width: 100%;
+        padding: 0 16px;
+    }
+
+    .content-2{
+        width: 100%;
+    }
+
+    .container-list-tab{
+        width: 95vw;
+    }
+
+    .challenge-svg, .integrity-svg,.pertnership-svg{
+        width: 150px;
+        transform: translateX(0);
+        margin-bottom: 25px;
+        display: block;
+    }
+}
+
+@media (max-width: 760px) {
+    .frame-content{
+        border-radius: 0 0 15px 15px;
+    }
+
+    .cores-value, .banner, .milestone, .managers{
+        margin-bottom: 25px;
+    }
+
+    .milestone-point{
+        margin-left: 0;
+        max-height: 270px;
+        overflow: hidden;
+        margin-bottom: 25px;
+        display: block;
+        width: auto;
+        padding: 25px 0 25px 20px;
+    }
+
+    .content-2 > div > div img{
+        width: 145px;
+        height: 125px;
+        margin-right: 25px;
+    }
+
+    .description{
+        width: 100%;
+        display: block;
+    }
+
+    .milestone-content{
+        width: 100%;
+    }
+
+    .milestone-content > h6{
+        position: absolute;
+        top: 25px;
+        left: 190px;
+    }
+
+    .milestone-content > h3{
+        position: absolute;
+        top: 50px;
+        left: 190px;
+    }
+
+    .content-2-wrapper{
+        padding-top: 0px;
+        padding-left: 0px;
+        margin-bottom: 10px;
+    }
+
+    .show-milestone{
+        max-height: 1700px !important;
+    }
+
+    .content-2 > div > div a {
+        position: absolute;
+        bottom: 0px !important;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: max-content;
+    }
+
+    .show-milestone-background{
+        max-height: 2000px;
+    }
+}
