@@ -1,28 +1,118 @@
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/utilities";
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/variables-dark';
+
+// Create your own map
+$custom-colors: (
+  'vng-navbar': #4d4d4d,
+  'vng-primary': #e65a26,
+  'vng-secondary': #eb5a26,
+  'vng-third': #ed7c2b,
+  'vng-text': #808080,
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import '../node_modules/bootstrap/scss/maps';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/utilities';
 
 $utilities: map-merge(
   $utilities,
   (
-    "color": map-merge(
-      map-get($utilities, "color"),
-      (
-        values: map-merge(
-          map-get(map-get($utilities, "color"), "values"),
-          (
-            'vng-navbar': #4d4d4d,
-            'vng-primary': #e65a26,
-            'vng-secondary': #EB5A26,
-            'vng-text': #808080
-          ),
-        ),
+    'color': map-merge(
+        map-get($utilities, 'color'),
+        (
+          responsive: true,
+        )
       ),
-    ),
   )
 );
 
-@import "../node_modules/bootstrap/scss/utilities/api";
+$utilities: map-merge(
+  $utilities,
+  (
+    'position': map-merge(
+        map-get($utilities, 'position'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'width': map-merge(
+        map-get($utilities, 'width'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'height': map-merge(
+        map-get($utilities, 'height'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'align-items': map-merge(
+        map-get($utilities, 'align-items'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-size': map-merge(
+        map-get($utilities, 'font-size'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-weight': map-merge(
+        map-get($utilities, 'font-weight'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'justify-content': map-merge(
+        map-get($utilities, 'justify-content'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+@import '../node_modules/bootstrap/scss/utilities/api';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

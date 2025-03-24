@@ -1,8 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 export default [
   { ignores: ['dist'] },
@@ -29,10 +29,35 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
-]
+  {
+    extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
+    rules: {
+      'prettier/prettier': [
+        'error',
+        {
+          arrowParens: 'always',
+          bracketSameLine: false,
+          bracketSpacing: true,
+          embeddedLanguageFormatting: 'auto',
+          htmlWhitespaceSensitivity: 'css',
+          insertPragma: false,
+          jsxSingleQuote: false,
+          printWidth: 120,
+          proseWrap: 'preserve',
+          quoteProps: 'as-needed',
+          requirePragma: false,
+          semi: true,
+          singleQuote: true,
+          tabWidth: 2,
+          trailingComma: 'all',
+          useTabs: false,
+          vueIndentScriptAndStyle: false,
+        },
+      ],
+    },
+    plugins: ['prettier'],
+  },
+];

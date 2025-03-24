@@ -1,0 +1,31 @@
+.auth_container {
+  width: min(100%, 500px);
+}
+
+.auth_input input {
+  border: none;
+  outline: none;
+}
+
+.auth_input:has(input:focus) {
+  border: 1px solid var(--vng-primary) !important;
+  color: var(--vng-primary) !important;
+}
+
+.auth_input input[type='password']::placeholder {
+  letter-spacing: normal;
+}
+
+.auth_input input[type='password'] {
+  letter-spacing: 10px;
+}
+
+.auth_input {
+  transition: all 0.3s;
+}
+
+.auth_footer {
+  background-image: url(https://cdn-gg.vnggames.app/id/0.4.55/static/media/bg_wave_md.ebc33c23f82755282afba41f50becdda.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

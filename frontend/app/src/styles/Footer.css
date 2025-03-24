@@ -1,10 +1,20 @@
 .footer {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 .dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: var(--vng-primary);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--vng-primary);
+}
+
+#footer-vng {
+  width: 166px;
+}
+
+@media screen and (max-width: 768px) {
+  #footer-vng {
+    width: 55px;
+  }
 }

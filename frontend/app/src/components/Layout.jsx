@@ -1,21 +1,21 @@
-import React from 'react'
-import { Outlet } from 'react-router'
+import React from 'react';
+import { Outlet } from 'react-router';
 
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 function Layout() {
   return (
-    <>
-        <Header />
+    <div className="min-vh-100 d-flex flex-column">
+      <Header />
 
-        <main className='min-vh-100 position-relative z-0' style={{marginTop: '81px'}}>
-            <Outlet />
-        </main>
+      <main className="position-relative z-0 flex-grow-1 flex-shrink-1" style={{ paddingTop: '81px' }}>
+        <Outlet />
+      </main>
 
-        <Footer />
-    </>
-  )
+      <Footer />
+    </div>
+  );
 }
 
-export default Layout
+export default Layout;
