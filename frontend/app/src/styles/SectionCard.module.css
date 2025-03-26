@@ -1,0 +1,16 @@
+.section_card,
+.section_card p,
+.section_card svg {
+    transition: all 0.3s;
+}
+
+.section_card:hover {
+    background-color: var(--vng-primary);
+    color: white !important;
+    cursor: pointer;
+}
+
+.section_card:hover p,
+.section_card:hover svg {
+    color: white !important;
+}

@@ -13,7 +13,7 @@ function Header() {
   const items = [
     {
       name: 'Về VNG',
-      link: '#',
+      link: '/about-us',
     },
     {
       name: 'Sản phẩm',
@@ -25,11 +25,11 @@ function Header() {
     },
     {
       name: 'Hỏi đáp',
-      link: '#',
+      link: '/faq',
     },
     {
       name: 'Liên hệ',
-      link: '#',
+      link: '/contact',
     },
   ];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -46,10 +46,10 @@ function Header() {
           <HiBars3 size={30} />
         </div>
 
-        <a
+        <Link
           className="d-inline-block position-md-relative position-absolute mx-auto mx-md-0 start-0 end-0"
           style={{ width: '60px' }}
-          href="#"
+          to="/"
         >
           <span className="d-block" data-icon="vng">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 16.81">
@@ -62,7 +62,7 @@ function Header() {
               </g>
             </svg>
           </span>
-        </a>
+        </Link>
 
         <ul
           className={`${isShowMenu ? 'd-block' : 'd-none'} py-5 py-md-0 position-absolute top-100 start-0 position-md-static z-3 d-md-flex flex-column flex-md-row vh-100 h-md-100 bg-white w-100 w-md-auto list-unstyled fs-5 fs-md-6 fw-bold fw-md-normal justify-content-between align-items-start align-items-md-center`}
@@ -80,16 +80,16 @@ function Header() {
           </span>
           {items.map((item, index) => (
             <li key={index}>
-              <a
+              <Link
                 className={`${!isShowMenu && activeIndex == index ? 'active' : ''} lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none`}
                 style={{ height: '81px' }}
-                href={item.link}
+                to={item.link}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
               >
                 {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

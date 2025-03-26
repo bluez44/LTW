@@ -9,6 +9,8 @@ $custom-colors: (
   'vng-secondary': #eb5a26,
   'vng-third': #ed7c2b,
   'vng-text': #808080,
+  'vng-text-bold': #4d4d4d,
+  'vng-news-list': #BDBDBDBD
 );
 
 // Merge the maps
@@ -49,6 +51,18 @@ $utilities: map-merge(
         map-get($utilities, 'width'),
         (
           responsive: true,
+          values: map-merge(
+            map-get(map-get($utilities, "width"), "values"),
+            (
+              10: 10%,
+              20: 20%,
+              30: 30%,
+              40: 40%,
+              50: 50%,
+              60: 60%,
+              70: 70%,
+            ),
+          ),
         )
       ),
   )
@@ -109,6 +123,91 @@ $utilities: map-merge(
         map-get($utilities, 'justify-content'),
         (
           responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'rounded': map-merge(
+        map-get($utilities, 'rounded'),
+        (
+          responsive: true,
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'start': map-merge(
+        map-get($utilities, 'start'),
+        (
+          responsive: true,
+          values: map-merge(
+            map-get(map-get($utilities, "start"), "values"),
+            (
+              10: 10%,
+              20: 20%,
+              30: 30%,
+              40: 40%,
+              50: 50%,
+              60: 60%,
+              70: 70%,
+            ),
+          ),
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'top': map-merge(
+        map-get($utilities, 'top'),
+        (
+          responsive: true,
+          values: map-merge(
+            map-get(map-get($utilities, "top"), "values"),
+            (
+              10px: 10px,
+              10: 10%,
+              20: 20%,
+              30: 30%,
+              40: 40%,
+              50: 50%,
+              60: 60%,
+              70: 70%,
+            ),
+          ),
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'max-width': map-merge(
+        map-get($utilities, 'max-width'),
+        (
+          responsive: true,
+          values: map-merge(
+            map-get(map-get($utilities, "max-width"), "values"),
+            (
+              10: 10%,
+              20: 20%,
+              30: 30%,
+              40: 40%,
+              50: 50%,
+              60: 60%,
+              70: 70%,
+            ),
+          ),
         )
       ),
   )
