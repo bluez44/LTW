@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
-import "./css/FAQ-icon.css"
-import "./css/FAQ.css"
-import userImage from "../assets/user.jpg"
-import listFAQ from "../mockups/FAQ"
+import "@/styles/FAQ-icon.css"
+import "@/styles/FAQ.css"
+import userImage from "@/assets/user.jpg"
+import listFAQ from "@/mockups/FAQ"
 
 
 const FAQ = () => {

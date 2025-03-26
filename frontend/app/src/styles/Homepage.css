@@ -1,0 +1,25 @@
+.homepage_section1 div:nth-child(2) {
+    padding: 47px 75px 55px 35px;
+    /* left: calc((100vw - 1000px) / 2); */
+}
+
+.homepage_section1 .scroll-btn {
+    position: absolute;
+    bottom: -25px;
+    right: calc((100vw - 1200px) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: bouncing .5s linear infinite;
+    animation-fill-mode: both;
+}
+
+.homepage_section3_btn.active,
+.homepage_section3_btn:hover {
+    background-color: #BDBDBDBD !important;
+    color: #fff !important;
+    cursor: pointer;
+}

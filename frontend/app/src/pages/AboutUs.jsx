@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import './css/AboutUs-icon.css'
-import './css/AboutUs.css'
+import '@/styles/AboutUs-icon.css'
+import '@/styles/AboutUs.css'
 
 const AboutUs = () => {
     const [selectedTab, setSelectedTab] = useState('challenge')

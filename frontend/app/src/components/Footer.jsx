@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedin } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
+import { IoIosArrowRoundUp } from 'react-icons/io';
 
 import '@/styles/Footer.css';
 import FooterMenu from '@/components/FooterMenu';
@@ -111,7 +112,7 @@ function Footer() {
             </a>
           </div>
 
-          <div className="d-flex align-items-center justify-content-center gap-4">
+          <div className="d-flex align-items-center justify-content-center flex-wrap gap-4">
             <a href="#" className="text-vng-secondary">
               <FaFacebookF size={24} className="text-vng-primary" />
             </a>
@@ -134,6 +135,12 @@ function Footer() {
           </div>
         </div>
       </div>
+      <a 
+        href='#' 
+        className="d-none d-xl-flex scroll-btn text-white bg-vng-text-bold"
+      >
+        <IoIosArrowRoundUp size={40}/>
+      </a>
     </footer>
   );
 }
