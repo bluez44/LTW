@@ -46,7 +46,7 @@ const FAQ = () => {
         setFaqs(listFAQ)
     })
     return(
-        <div className="container">
+        <div className="container-faq">
             <section className="banner">
                 <div className="banner-container">
                     <div className="banner-wrapper">
