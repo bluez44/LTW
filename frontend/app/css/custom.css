@@ -239,6 +239,10 @@
   --bs-focus-ring-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-focus-ring-opacity));
 }
 
+.focus-ring-vng-text-user {
+  --bs-focus-ring-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-focus-ring-opacity));
+}
+
 .focus-ring-vng-news-list {
   --bs-focus-ring-color: rgba(var(--bs-vng-news-list-rgb), var(--bs-focus-ring-opacity));
 }
@@ -483,6 +487,11 @@
 .border-vng-text-bold {
   --bs-border-opacity: 1;
   border-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-border-opacity)) !important;
+}
+
+.border-vng-text-user {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-border-opacity)) !important;
 }
 
 .border-vng-news-list {
@@ -1523,6 +1532,11 @@
   color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-vng-text-user {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-vng-news-list {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -1760,6 +1774,11 @@
   text-decoration-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-link-underline-opacity)) !important;
 }
 
+.link-underline-vng-text-user {
+  --bs-link-underline-opacity: 1;
+  text-decoration-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-link-underline-opacity)) !important;
+}
+
 .link-underline-vng-news-list {
   --bs-link-underline-opacity: 1;
   text-decoration-color: rgba(var(--bs-vng-news-list-rgb), var(--bs-link-underline-opacity)) !important;
@@ -1886,6 +1905,11 @@
 .bg-vng-text-bold {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-vng-text-user {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-vng-news-list {
@@ -3280,6 +3304,11 @@
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-sm-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-sm-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -4406,6 +4435,11 @@
   .text-md-vng-text-bold {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
+  }
+
+  .text-md-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
   }
 
   .text-md-vng-news-list {
@@ -5536,6 +5570,11 @@
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-lg-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-lg-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -6662,6 +6701,11 @@
   .text-xl-vng-text-bold {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
+  }
+
+  .text-xl-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
   }
 
   .text-xl-vng-news-list {
@@ -7792,6 +7836,11 @@
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-xxl-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-xxl-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -8037,6 +8086,7 @@
   --bs-vng-third: #ed7c2b;
   --bs-vng-text: #808080;
   --bs-vng-text-bold: #4d4d4d;
+  --bs-vng-text-user: #141415;
   --bs-vng-news-list: #BDBDBDBD;
   --bs-primary-rgb: 13, 110, 253;
   --bs-secondary-rgb: 108, 117, 125;
@@ -8052,6 +8102,7 @@
   --bs-vng-third-rgb: 237, 124, 43;
   --bs-vng-text-rgb: 128, 128, 128;
   --bs-vng-text-bold-rgb: 77, 77, 77;
+  --bs-vng-text-user-rgb: 20, 20, 21;
   --bs-vng-news-list-rgb: 189, 189, 189;
   --bs-primary-text-emphasis: #052c65;
   --bs-secondary-text-emphasis: #2b2f32;
@@ -11432,6 +11483,23 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #4d4d4d;
 }
 
+.btn-vng-text-user {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #141415;
+  --bs-btn-border-color: #141415;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #111112;
+  --bs-btn-hover-border-color: #101011;
+  --bs-btn-focus-shadow-rgb: 55, 55, 56;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #101011;
+  --bs-btn-active-border-color: #0f0f10;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #141415;
+  --bs-btn-disabled-border-color: #141415;
+}
+
 .btn-vng-news-list {
   --bs-btn-color: #000;
   --bs-btn-bg: #BDBDBDBD;
@@ -11684,6 +11752,23 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #4d4d4d;
   --bs-btn-disabled-bg: transparent;
   --bs-btn-disabled-border-color: #4d4d4d;
+  --bs-gradient: none;
+}
+
+.btn-outline-vng-text-user {
+  --bs-btn-color: #141415;
+  --bs-btn-border-color: #141415;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #141415;
+  --bs-btn-hover-border-color: #141415;
+  --bs-btn-focus-shadow-rgb: 20, 20, 21;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #141415;
+  --bs-btn-active-border-color: #141415;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #141415;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #141415;
   --bs-gradient: none;
 }
 
@@ -13376,6 +13461,13 @@ textarea.form-control-lg {
   --bs-alert-link-color: var(--bs-vng-text-bold-text-emphasis);
 }
 
+.alert-vng-text-user {
+  --bs-alert-color: var(--bs-vng-text-user-text-emphasis);
+  --bs-alert-bg: var(--bs-vng-text-user-bg-subtle);
+  --bs-alert-border-color: var(--bs-vng-text-user-border-subtle);
+  --bs-alert-link-color: var(--bs-vng-text-user-text-emphasis);
+}
+
 .alert-vng-news-list {
   --bs-alert-color: var(--bs-vng-news-list-text-emphasis);
   --bs-alert-bg: var(--bs-vng-news-list-bg-subtle);
@@ -13864,6 +13956,19 @@ textarea.form-control-lg {
   --bs-list-group-active-color: var(--bs-vng-text-bold-bg-subtle);
   --bs-list-group-active-bg: var(--bs-vng-text-bold-text-emphasis);
   --bs-list-group-active-border-color: var(--bs-vng-text-bold-text-emphasis);
+}
+
+.list-group-item-vng-text-user {
+  --bs-list-group-color: var(--bs-vng-text-user-text-emphasis);
+  --bs-list-group-bg: var(--bs-vng-text-user-bg-subtle);
+  --bs-list-group-border-color: var(--bs-vng-text-user-border-subtle);
+  --bs-list-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-vng-text-user-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-vng-text-user-border-subtle);
+  --bs-list-group-active-color: var(--bs-vng-text-user-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-vng-text-user-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-vng-text-user-text-emphasis);
 }
 
 .list-group-item-vng-news-list {
@@ -15479,6 +15584,11 @@ textarea.form-control-lg {
   background-color: RGBA(var(--bs-vng-text-bold-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
+.text-bg-vng-text-user {
+  color: #fff !important;
+  background-color: RGBA(var(--bs-vng-text-user-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+
 .text-bg-vng-news-list {
   color: #000 !important;
   background-color: RGBA(var(--bs-vng-news-list-rgb), var(--bs-bg-opacity, 1)) !important;
@@ -15608,6 +15718,15 @@ textarea.form-control-lg {
 .link-vng-text-bold:hover, .link-vng-text-bold:focus {
   color: RGBA(62, 62, 62, var(--bs-link-opacity, 1)) !important;
   text-decoration-color: RGBA(62, 62, 62, var(--bs-link-underline-opacity, 1)) !important;
+}
+
+.link-vng-text-user {
+  color: RGBA(var(--bs-vng-text-user-rgb), var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(var(--bs-vng-text-user-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}
+.link-vng-text-user:hover, .link-vng-text-user:focus {
+  color: RGBA(16, 16, 17, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(16, 16, 17, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-vng-news-list {
@@ -16079,6 +16198,10 @@ textarea.form-control-lg {
   --bs-focus-ring-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-focus-ring-opacity));
 }
 
+.focus-ring-vng-text-user {
+  --bs-focus-ring-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-focus-ring-opacity));
+}
+
 .focus-ring-vng-news-list {
   --bs-focus-ring-color: rgba(var(--bs-vng-news-list-rgb), var(--bs-focus-ring-opacity));
 }
@@ -16323,6 +16446,11 @@ textarea.form-control-lg {
 .border-vng-text-bold {
   --bs-border-opacity: 1;
   border-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-border-opacity)) !important;
+}
+
+.border-vng-text-user {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-border-opacity)) !important;
 }
 
 .border-vng-news-list {
@@ -17363,6 +17491,11 @@ textarea.form-control-lg {
   color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-vng-text-user {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-vng-news-list {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -17600,6 +17733,11 @@ textarea.form-control-lg {
   text-decoration-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-link-underline-opacity)) !important;
 }
 
+.link-underline-vng-text-user {
+  --bs-link-underline-opacity: 1;
+  text-decoration-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-link-underline-opacity)) !important;
+}
+
 .link-underline-vng-news-list {
   --bs-link-underline-opacity: 1;
   text-decoration-color: rgba(var(--bs-vng-news-list-rgb), var(--bs-link-underline-opacity)) !important;
@@ -17726,6 +17864,11 @@ textarea.form-control-lg {
 .bg-vng-text-bold {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-vng-text-user {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-vng-text-user-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-vng-news-list {
@@ -19120,6 +19263,11 @@ textarea.form-control-lg {
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-sm-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-sm-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -20246,6 +20394,11 @@ textarea.form-control-lg {
   .text-md-vng-text-bold {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
+  }
+
+  .text-md-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
   }
 
   .text-md-vng-news-list {
@@ -21376,6 +21529,11 @@ textarea.form-control-lg {
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-lg-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-lg-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -22504,6 +22662,11 @@ textarea.form-control-lg {
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
   }
 
+  .text-xl-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
+  }
+
   .text-xl-vng-news-list {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-news-list-rgb), var(--bs-text-opacity)) !important;
@@ -23630,6 +23793,11 @@ textarea.form-control-lg {
   .text-xxl-vng-text-bold {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-vng-text-bold-rgb), var(--bs-text-opacity)) !important;
+  }
+
+  .text-xxl-vng-text-user {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-vng-text-user-rgb), var(--bs-text-opacity)) !important;
   }
 
   .text-xxl-vng-news-list {

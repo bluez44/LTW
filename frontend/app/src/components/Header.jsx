@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { MdLanguage } from 'react-icons/md';
 import { Link } from 'react-router';
 import { HiBars3 } from 'react-icons/hi2';
-import { IoCloseSharp } from 'react-icons/io5';
+import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 import '@/styles/Header.css';
+import HandleLogout from '@/utils/functions/HandleLogout';
 
 function Header() {
   const [isLogin, setIsLogin] = React.useState(false);
@@ -32,7 +33,33 @@ function Header() {
       link: '/contact',
     },
   ];
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  const [isShowAction, setIsShowAction] = useState(false);
+
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+  useLayoutEffect(() => {
+    if(user) {
+      setIsLogin(true)
+    }
+  })
+
+  window.addEventListener('click', (e) => {
+    if (isShowAction) {
+      setIsShowAction(false);
+    }
+  })
+
+  useEffect(() => {
+    const pathName = window.location.pathname;
+
+    items.forEach((item, index) => {
+      if (item.link === pathName) {
+        setActiveIndex(index);
+      }
+    });
+  })
 
   return (
     <header className="shadow position-fixed top-0 left-0 w-100 z-3 bg-white">
@@ -50,6 +77,9 @@ function Header() {
           className="d-inline-block position-md-relative position-absolute mx-auto mx-md-0 start-0 end-0"
           style={{ width: '60px' }}
           to="/"
+          onClick={() => {
+            setActiveIndex(-1);
+          }}
         >
           <span className="d-block" data-icon="vng">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 16.81">
@@ -81,10 +111,11 @@ function Header() {
           {items.map((item, index) => (
             <li key={index}>
               <Link
-                className={`${!isShowMenu && activeIndex == index ? 'active' : ''} lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none`}
+                className={`${!isShowMenu && activeIndex == index ? 'active' : ''} position-relative lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none`}
                 style={{ height: '81px' }}
                 to={item.link}
                 onClick={(e) => {
+                  setActiveIndex(index);
                   e.stopPropagation();
                 }}
               >
@@ -93,16 +124,61 @@ function Header() {
             </li>
           ))}
         </ul>
-        <div className="d-flex justify-content-between align-items-center h-100 gap-3">
+        <div className="position-relative d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center h-100 gap-0 gap-md-3">
           <CiSearch size={30} />
-          <div className="d-flex justify-content-center align-items-center gap-1">
-            <MdLanguage size={30} />
-            <span className="fs-5 lh-1">VI</span>
-          </div>
-          {!isLogin && (
+          {!isLogin ? (
             <Link to={'/auth/login'} className="d-none d-md-block btn btn-vng-primary text-white p-3">
               Đăng nhập
             </Link>
+          ) : (
+            <>
+              <p 
+                className='header_user_info h-md-100 d-flex align-items-center'
+                style={{cursor: 'pointer'}}
+                onClick={e => {
+                  e.stopPropagation()
+                  setIsShowAction(!isShowAction);
+                }}
+              >
+                Xin chào {user?.username}
+              </p>
+              {
+                isShowAction && (
+                  <ul 
+                    style={{width: '200%'}} 
+                    className='header_user_action position-absolute bg-white p-3 z-3 top-100 top-md-70 end-0 d-flex flex-column list-unstyled rounded shadow'
+                    onClick={e => {
+                      e.stopPropagation()
+                    }}
+                  >
+                    <li>
+                      <Link 
+                        className='text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4'
+                        onClick={e => {
+                          e.stopPropagation()
+                        }}
+                      >
+                        <MdOutlineManageAccounts size={24}/>
+                        <span className='ms-1'>Trung tâm tài khoản</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link 
+                        className='text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4'
+                        onClick={e => {
+                          e.stopPropagation()
+                          HandleLogout()
+                          window.location.reload();
+                        }}
+                      >
+                        <IoLogOut size={24}/>
+                        <span className='ms-1'>Đăng xuất</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )
+              }
+            </>
           )}
         </div>
       </nav>

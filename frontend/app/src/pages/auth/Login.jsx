@@ -11,7 +11,7 @@ function Login() {
       <ToastContainer />
       <div className="d-flex flex-column justify-content-center">
         <div
-          className="d-flex flex-column justify-content-center align-items-center w-100"
+          className="container d-flex flex-column justify-content-center align-items-center w-100"
           style={{ minHeight: '80dvh' }}
         >
           <div className="auth_container d-flex flex-column gap-3 align-items-center">
@@ -28,6 +28,12 @@ function Login() {
               </Link>
             </p>
             <LoginForm />
+            <p className='text-vng-text fs-5'>
+              Chưa có tài khoản?{' '}
+              <Link to={'/auth/register'} className='text-vng-third text-decoration-none'>
+                Đăng ký ngay
+              </Link>
+            </p>
           </div>
         </div>
         <div

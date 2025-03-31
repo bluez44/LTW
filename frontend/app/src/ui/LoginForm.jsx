@@ -7,7 +7,28 @@ import { toast } from 'react-toastify';
 function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const notify = () => toast.error('Sai tài khoản hoặc mật khẩu!');
+  const user = {
+    username: 'user',
+    password: 'user',
+  }
+
+  const admin = {
+    username: 'admin',
+    password: 'admin',
+  }
+
+  const notify = (type, message) => {
+    switch (type) {
+      case 'success':
+        toast.success(message);
+        break;
+      case 'error':
+        toast.error(message);
+        break;
+      default:
+        break;
+    }
+  }
 
   return (
     <form action="" className="d-flex flex-column gap-4 w-100" method="POST">
@@ -18,8 +39,10 @@ function LoginForm() {
         <input
           required
           name="username"
+          id='username'
           className="outline-none border-none w-100 py-2"
           type="text"
+          defaultValue={user.username}
           placeholder="Nhập tên đăng nhập"
         />
       </div>
@@ -31,9 +54,11 @@ function LoginForm() {
           <input
             required
             name="password"
+            id='password'
             className="outline-none border-none w-100 px-5 py-2"
             type={isShowPassword ? 'password' : 'text'}
-            placeholder="Nhập tên đăng nhập"
+            defaultValue={user.password}
+            placeholder="Nhập mật khẩu"
           />
           <span className="position-absolute start-0 top-50 translate-middle-y text-vng-text">
             <CiLock size={24} />
@@ -54,7 +79,19 @@ function LoginForm() {
         className="btn btn-vng-third text-white py-4"
         type="submit"
         onClick={(e) => {
-          notify();
+          e.preventDefault()
+          if(document.getElementById('username').value === user.username && document.getElementById('password').value === user.password) {
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            notify('success', 'Đăng nhập thành công!');
+            
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 500);
+            return;
+          }
+          
+          notify('error', 'Sai tài khoản hoặc mật khẩu!');
         }}
       >
         Tiếp tục
