@@ -1,0 +1,2 @@
+1. Install composer
+2. Run: composer require firebase/php-jwt
