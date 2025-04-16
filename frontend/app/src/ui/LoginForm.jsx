@@ -4,6 +4,10 @@ import { CiLock } from 'react-icons/ci';
 import { LuEyeClosed, LuEye } from 'react-icons/lu';
 import { toast } from 'react-toastify';
 
+import { login } from '@/api';
+import notify from '@/utils/functions/Notify';
+import { getUserInfo } from '../api';
+
 function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -17,24 +21,37 @@ function LoginForm() {
     password: 'admin',
   }
 
-  const notify = (type, message) => {
-    switch (type) {
-      case 'success':
-        toast.success(message);
-        break;
-      case 'error':
-        toast.error(message);
-        break;
-      default:
-        break;
-    }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    // console.log('data', data);
+
+    const res = await login(data);
+    
+    // console.log('res', res);
+
+    notify(res.status, res.message);
+
+    // if (res.status === 201) {
+    //     setTimeout(() => {
+    //         navigate('/auth/login');
+    //     }, 2000);
+    // }
+    const userInfo = await getUserInfo();
+    console.log('userInfo', userInfo);
   }
 
   return (
-    <form action="" className="d-flex flex-column gap-4 w-100" method="POST">
+    <form 
+      onSubmit={handleLogin}
+      className="d-flex flex-column gap-4 w-100" 
+      method="POST"
+    >
       <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
         <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
-          Tên đăng nhập *
+          Tên đăng nhập/Email *
         </p>
         <input
           required
@@ -43,7 +60,7 @@ function LoginForm() {
           className="outline-none border-none w-100 py-2"
           type="text"
           defaultValue={user.username}
-          placeholder="Nhập tên đăng nhập"
+          placeholder="Nhập tên đăng nhập hoặc email"
         />
       </div>
       <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
@@ -70,6 +87,7 @@ function LoginForm() {
               e.preventDefault();
               setIsShowPassword(!isShowPassword);
             }}
+            tabIndex={-1}
           >
             {isShowPassword ? <LuEyeClosed size={24} /> : <LuEye size={24} />}
           </button>
@@ -79,19 +97,6 @@ function LoginForm() {
         className="btn btn-vng-third text-white py-4"
         type="submit"
         onClick={(e) => {
-          e.preventDefault()
-          if(document.getElementById('username').value === user.username && document.getElementById('password').value === user.password) {
-            localStorage.setItem('user', JSON.stringify(user));
-            
-            notify('success', 'Đăng nhập thành công!');
-            
-            setTimeout(() => {
-              window.location.href = '/';
-            }, 500);
-            return;
-          }
-          
-          notify('error', 'Sai tài khoản hoặc mật khẩu!');
         }}
       >
         Tiếp tục
