@@ -1,15 +1,20 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 
+
+import { Link } from 'react-router';
+
 import { MdLanguage } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+
 
 import { HiBars3 } from 'react-icons/hi2';
 import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
 import { MdOutlineManageAccounts } from "react-icons/md";
 
+import { logout } from '@/api';
+import notify from '@/utils/functions/Notify';
+
 import '@/styles/Header.css';
-import HandleLogout from '@/utils/functions/HandleLogout';
 
 function Header() {
   const [isLogin, setIsLogin] = React.useState(false);
@@ -40,7 +45,7 @@ function Header() {
 
   const [isShowAction, setIsShowAction] = useState(false);
 
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+  const user = JSON.parse(localStorage.getItem('userInfo')) || null;
 
   useLayoutEffect(() => {
     if(user) {
@@ -143,7 +148,7 @@ function Header() {
                   setIsShowAction(!isShowAction);
                 }}
               >
-                Xin chào {user?.username}
+                Xin chào {user?.user_name}
               </p>
               {
                 isShowAction && (
@@ -168,10 +173,17 @@ function Header() {
                     <li>
                       <Link 
                         className='text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4'
-                        onClick={e => {
+                        onClick={async e => {
                           e.stopPropagation()
-                          HandleLogout()
-                          window.location.reload();
+                          
+                          const res = await logout();
+
+                          notify(res.status, res.message);
+                          
+                          if(res.status === 200) {
+                            localStorage.removeItem('user');
+                            setIsLogin(false);
+                          }
                         }}
                       >
                         <IoLogOut size={24}/>

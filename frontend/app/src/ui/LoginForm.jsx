@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 
 import { CiLock } from 'react-icons/ci';
 import { LuEyeClosed, LuEye } from 'react-icons/lu';
-import { toast } from 'react-toastify';
 
 import { login } from '@/api';
 import notify from '@/utils/functions/Notify';
 import { getUserInfo } from '../api';
+import { useNavigate } from 'react-router';
 
 function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const user = {
     username: 'user',
@@ -30,17 +31,25 @@ function LoginForm() {
 
     const res = await login(data);
     
-    // console.log('res', res);
+    console.log('res', res);
 
     notify(res.status, res.message);
 
-    // if (res.status === 201) {
-    //     setTimeout(() => {
-    //         navigate('/auth/login');
-    //     }, 2000);
-    // }
-    const userInfo = await getUserInfo();
-    console.log('userInfo', userInfo);
+    if(res.status == 200) {
+
+      const userInfo = await getUserInfo();
+  
+      if(userInfo.status === 200) {
+        console.log('userInfo', userInfo);
+    
+        localStorage.setItem('userInfo', JSON.stringify(userInfo.data.user));
+  
+        setTimeout(() => {
+          navigate('/');
+        }, 2000)
+      }
+    }
+    
   }
 
   return (
@@ -73,7 +82,7 @@ function LoginForm() {
             name="password"
             id='password'
             className="outline-none border-none w-100 px-5 py-2"
-            type={isShowPassword ? 'password' : 'text'}
+            type={!isShowPassword ? 'password' : 'text'}
             defaultValue={user.password}
             placeholder="Nhập mật khẩu"
           />

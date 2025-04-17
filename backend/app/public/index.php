@@ -19,6 +19,8 @@ if ($path === $url . '/login' && $method === 'POST') {
     login();
 } elseif ($path === $url . '/register' && $method === 'POST') {
     register();
+} elseif ($path === $url . '/logout' && $method === 'POST') {
+    logout();
 } elseif ($path === $url . '/profile' && $method === 'GET') {
     profile();
 } else {

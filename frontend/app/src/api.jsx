@@ -44,6 +44,17 @@ export const register = async ({ email, user_name, password, first_name, last_na
     }
 }
 
+export const logout = async () => {
+    try {
+        const response = await instance.post(`${API_URL}/logout`);
+        localStorage.removeItem('userInfo');
+        return response.data;
+    } catch (error) {
+        // console.error("Logout error:", error);
+        return error.response.data;
+    }
+}
+
 export const getUserInfo = async (userId) => {
     try {
         const response = await instance.get(`${API_URL}/profile`);
