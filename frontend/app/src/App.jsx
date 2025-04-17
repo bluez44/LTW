@@ -10,6 +10,9 @@ import AboutUs from '@/pages/AboutUs'
 import FAQ from '@/pages/FAQ';
 import ContactUs from '@/pages/ContactUs';
 import Register from '@/pages/auth/Register';
+import AdminLogin from '@/pages/auth/AdminLogin';
+import AdminLayout from '@/components/AdminLayout';
+import Home from '@/pages/Admin/Home';
 
 function App() {
   return (
@@ -20,9 +23,16 @@ function App() {
         <Route path="faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
       </Route>
+
+      <Route element={<AdminLayout />}>
+        <Route path="/admin" element={<Home />} />
+      </Route>
+
+
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/reset" element={<ForgotPassword />} />
       <Route path='/auth/register' element={<Register />} />
+      <Route path="/auth/admin/login" element={<AdminLogin />} />
     </Routes>
   );
 }

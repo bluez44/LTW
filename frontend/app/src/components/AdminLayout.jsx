@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router';
 
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { ToastContainer } from 'react-toastify';
 
-function Layout() {
+function AdminLayout() {
   return (
     <div className="min-vh-100 d-flex flex-column">
-      <Header />
+      <h1>Header</h1>
       <ToastContainer />
       <main className="position-relative z-0 flex-grow-1 flex-shrink-1" style={{ padding: '81px 0 81px 0' }}>
         <Outlet />
       </main>
 
-      <Footer />
+      <h1>Footer</h1>
     </div>
   );
 }
 
-export default Layout;
+export default AdminLayout;
