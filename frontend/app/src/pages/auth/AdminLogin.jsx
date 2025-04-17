@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 
 import '@/styles/Auth.css';
-import LoginForm from '@/ui/LoginForm';
+import AdminLoginForm from '@/ui/AdminLoginForm';
 
-function Login() {
+function AdminLogin() {
   return (
     <>
       <ToastContainer />
@@ -21,26 +21,7 @@ function Login() {
               alt="zing"
             />
             <p className="fs-4 fw-bold">Đăng nhập với Zing ID</p>
-            <p className="text-vng-text fs-5">
-              Quên mật khẩu?{' '}
-              <Link className="text-vng-third text-decoration-none" to="/auth/reset">
-                Khôi phục mật khẩu
-              </Link>
-            </p>
-            <LoginForm />
-            <p className='text-vng-text fs-5'>
-              Chưa có tài khoản?{' '}
-              <Link to={'/auth/register'} className='text-vng-third text-decoration-none'>
-                Đăng ký ngay
-              </Link>
-            </p>
-
-            <Link
-              className="btn btn-primary text-white py-4"
-              to={'/auth/admin/login'}
-            >
-              Đăng nhập với tài khoản Admin
-            </Link>
+            <AdminLoginForm />
           </div>
         </div>
         <div
@@ -59,4 +40,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default AdminLogin;

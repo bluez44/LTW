@@ -3,19 +3,13 @@ import React, { useState } from 'react';
 import { CiLock } from 'react-icons/ci';
 import { LuEyeClosed, LuEye } from 'react-icons/lu';
 
-import { login } from '@/api';
+import { adminLogin } from '@/api';
 import notify from '@/utils/functions/Notify';
-import { getUserInfo } from '../api';
 import { useNavigate } from 'react-router';
 
 function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const navigate = useNavigate();
-
-  const user = {
-    username: 'user',
-    password: 'user',
-  }
 
   const admin = {
     username: 'admin',
@@ -29,7 +23,7 @@ function LoginForm() {
 
     // console.log('data', data);
 
-    const res = await login(data);
+    const res = await adminLogin(data);
     
     console.log('res', res);
 
@@ -37,7 +31,7 @@ function LoginForm() {
 
     if(res.status == 200) {
       setTimeout(() => {
-        navigate('/');
+        navigate('/admin');
       }, 2000)
     }
     
@@ -59,7 +53,7 @@ function LoginForm() {
           id='username'
           className="outline-none border-none w-100 py-2"
           type="text"
-          defaultValue={user.username}
+          defaultValue={admin.username}
           placeholder="Nhập tên đăng nhập hoặc email"
         />
       </div>
@@ -74,7 +68,7 @@ function LoginForm() {
             id='password'
             className="outline-none border-none w-100 px-5 py-2"
             type={!isShowPassword ? 'password' : 'text'}
-            defaultValue={user.password}
+            defaultValue={admin.password}
             placeholder="Nhập mật khẩu"
           />
           <span className="position-absolute start-0 top-50 translate-middle-y text-vng-text">

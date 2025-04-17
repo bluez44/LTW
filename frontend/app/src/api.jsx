@@ -24,6 +24,18 @@ export const login = async ({username, password}) => {
     }
 }
 
+export const adminLogin = async ({username, password}) => {
+    // console.log(username, password);
+
+    try {
+        const response = await instance.post(`${API_URL}/admin/login`, { username, password });
+        return response.data;
+    } catch (error) {
+        // console.error("Login error:", error);
+        return error.response.data;
+    }
+}
+
 export const register = async ({ email, user_name, password, first_name, last_name, phone_number, birth_day }) => {
     try {
         const response = await instance.post(
@@ -55,7 +67,7 @@ export const logout = async () => {
     }
 }
 
-export const getUserInfo = async (userId) => {
+export const getUserInfo = async () => {
     try {
         const response = await instance.get(`${API_URL}/profile`);
         return response.data;

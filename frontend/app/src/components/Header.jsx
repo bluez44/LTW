@@ -14,10 +14,11 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 import { logout } from '@/api';
 import notify from '@/utils/functions/Notify';
 
+import { getUserInfo } from '@/api';
+
 import '@/styles/Header.css';
 
 function Header() {
-  const [isLogin, setIsLogin] = React.useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
   const items = [
     {
@@ -45,13 +46,25 @@ function Header() {
 
   const [isShowAction, setIsShowAction] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem('userInfo')) || null;
+  const [userInfo, setUserInfo] = useState(null);
 
-  useLayoutEffect(() => {
-    if(user) {
-      setIsLogin(true)
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUserInfo();
+      return res;
     }
-  })
+
+    const res = fetchUser()
+    // console.log('res', res);
+
+    res.then(res => {
+      if(res.status === 200) {
+        setUserInfo(res.data.user);
+      } else {
+        setUserInfo(null);
+      }
+    })
+  }, [])
 
   window.addEventListener('click', (e) => {
     if (isShowAction) {
@@ -134,7 +147,7 @@ function Header() {
         </ul>
         <div className="position-relative d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center h-100 gap-0 gap-md-3">
           <CiSearch size={30} />
-          {!isLogin ? (
+          {!userInfo ? (
             <Link to={'/auth/login'} className="d-none d-md-block btn btn-vng-primary text-white p-3">
               Đăng nhập
             </Link>
@@ -148,7 +161,7 @@ function Header() {
                   setIsShowAction(!isShowAction);
                 }}
               >
-                Xin chào {user?.user_name}
+                Xin chào {userInfo?.user_name}
               </p>
               {
                 isShowAction && (
@@ -182,7 +195,7 @@ function Header() {
                           
                           if(res.status === 200) {
                             localStorage.removeItem('user');
-                            setIsLogin(false);
+                            setUserInfo(null);
                           }
                         }}
                       >
