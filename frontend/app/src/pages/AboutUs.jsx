@@ -55,7 +55,7 @@ const AboutUs = () => {
         }
     };
     return (
-        <div className='container'>
+        <div className='container-aboutus'>
             <section className="banner">
                 <div className="banner-container">
                     <div className="">
