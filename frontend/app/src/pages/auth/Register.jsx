@@ -1,12 +1,9 @@
-import React from 'react';
-import { ToastContainer } from 'react-toastify';
+import React from 'react'
 
-import ForgotForm from '@/ui/ForgotForm';
-import ResetForm from '@/ui/ResetForm';
+import { ToastContainer } from 'react-toastify'
+import RegisterForm from '@/ui/RegisterForm'
 
-function ForgotPassword() {
-  const [formState, setFormState] = React.useState('forgot');
-
+function Register() {
   return (
     <>
       <ToastContainer />
@@ -21,8 +18,8 @@ function ForgotPassword() {
               width={100}
               alt="zing"
             />
-            <p className="fs-4 fw-bold">Lấy lại mật khẩu với Zing ID</p>
-            {formState === 'forgot' ? <ForgotForm setFormSate={setFormState} /> : <ResetForm />}
+            <p className="fs-4 fw-bold">Đăng ký tài khoản Zing ID</p>
+            <RegisterForm />
           </div>
         </div>
         <div
@@ -38,7 +35,7 @@ function ForgotPassword() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default ForgotPassword;
+export default Register
