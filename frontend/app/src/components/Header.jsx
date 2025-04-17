@@ -1,6 +1,9 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import { Link } from 'react-router';
+
+import { MdLanguage } from 'react-icons/md';
+import { Link } from 'react-router-dom';
+
 import { HiBars3 } from 'react-icons/hi2';
 import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
 import { MdOutlineManageAccounts } from "react-icons/md";
@@ -18,7 +21,7 @@ function Header() {
     },
     {
       name: 'Sản phẩm',
-      link: '#',
+      link: '/products',
     },
     {
       name: 'Tin tức',
