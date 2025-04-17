@@ -13,7 +13,7 @@ class UserModel {
     public static function findUserById($id)
     {
         global $conn;
-        $stmt = $conn->prepare("SELECT * FROM user WHERE id = ? LIMIT 1");
+        $stmt = $conn->prepare("SELECT id, email, user_name, first_name, last_name, phone_number, birth_day FROM user WHERE id = ? LIMIT 1");
         $stmt->bind_param("s", $id);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();

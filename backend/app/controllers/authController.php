@@ -73,6 +73,12 @@ function register()
     }
 }
 
+function logout()
+{
+    setcookie("token", "", time() - 3600, "/");
+    response_json(['message' => 'Đăng xuất thành công'], 200);
+}
+
 function profile()
 {
     $user = getUserFromToken();
@@ -86,9 +92,8 @@ function profile()
     response_json([
         'message' => 'Get profile success',
         'data' => [
-            'user' => $user,
-            'data' => $data
+            'user' => $data,
         ]
-    ]);
+    ], 200);
 }
 
