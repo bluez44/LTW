@@ -60,7 +60,6 @@ const FAQ = () => {
             alert("Nhập đầy đủ tiêu đề và nội dung câu hỏi trước khi gửi")
             return
         }
-        console.log(titleInputQuestion)
         try {
             const response = await axios.post("http://localhost/backend/app/controllers/questions/create-question.php", {
                 account_id: 1,
@@ -84,7 +83,6 @@ const FAQ = () => {
     const fetchAnswersOfQuestion = async (question_id) =>{
         try {
             const response = await axios.get(`http://localhost/backend/app/controllers/answers/get-answers.php?question_id=${question_id}`)
-            console.log(response)
             setListAnswers(prevList => ({
                 ...prevList,
                 [question_id]: response.data
@@ -206,7 +204,6 @@ const FAQ = () => {
 
         try {
             const response = await axios.delete(`http://localhost/backend/app/controllers/questions/delete-question.php?question_id=${question_id}`)
-            console.log(response.data)
             if(response.data.status === 'success'){
                 if(faqs.length < 10) {
                     fetchInitFAQs(filterState, search)
