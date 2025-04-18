@@ -137,3 +137,4 @@ function logout()
     response_json(['message' => 'Đăng xuất thành công'], 200);
 }
 
+?>
