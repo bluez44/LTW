@@ -67,7 +67,7 @@ npm run dev
 
 ## 👨‍💻 Thành Viên Thực Hiện
 
-| Họ Tên               | GitHub                                                           | Công Việc Đóng Góp                                                                                                        |
+| Họ Tên               | GitHub                                                           | Đóng góp                                                                                                                  |
 | -------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Võ Lê Quang Vinh     | [github.com/bluez44](https://github.com/bluez44)                 | Thiết kế và phát triển giao diện trang chủ, xác thực, liên hệ người dùng, thiết kế database, ERD, api liên quan           |
 | Trần Trung Nhựt      | [github.com/Tran-Trung-Nhut](https://github.com/Tran-Trung-Nhut) | Thiết kế và phát triển giao diện trang giới thiệu doanh nghiệp, hỏi đáp người dùng, thiết kế database, ERD, api liên quan |
