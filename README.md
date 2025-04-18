@@ -1,6 +1,6 @@
 # 🌐 Website Giới Thiệu Doanh Nghiệp VNG
 
-Trang web này được xây dựng với mục đích giới thiệu tổng quan về doanh nghiệp **VNG Corporation** – một trong những công ty công nghệ hàng đầu tại Việt Nam. Website cung cấp các thông tin nổi bật về:
+Trang web này được xây dựng với mục đích học tập cũng như giới thiệu tổng quan về doanh nghiệp **VNG Corporation** – một trong những công ty công nghệ hàng đầu tại Việt Nam. Website cung cấp các thông tin nổi bật về:
 
 - Giới thiệu doanh nghiệp
 - Tin tức mới nhất liên quan đến VNG
@@ -16,7 +16,7 @@ Trang web được phát triển dựa trên công nghệ **ReactJS (Frontend)**
 ### 1. Clone dự án về máy:
 
 ```bash
-git clone <https://github.com/bluez44/LTW.git>
+git clone https://github.com/bluez44/LTW.git
 ```
 
 ### 2. Cài đặt XAMPP:
