@@ -9,6 +9,7 @@ require_once __DIR__ . '/../middleware/Cors.php';
 require_once __DIR__ . '/../controllers/AdminController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
+require_once __DIR__ . '/../controllers/GuestController.php';
 
 
 if ($path === $url . '/login' && $method === 'POST') {
@@ -23,6 +24,8 @@ if ($path === $url . '/login' && $method === 'POST') {
     adminLogin();
 } elseif ($path === $url . '/admin/register' && $method === 'POST') {
     adminRegister();
+} elseif ($path === $url . '/contact' && $method === 'POST') {
+    sendContactForm();
 } else {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found ' . $path . " " . $method]);
