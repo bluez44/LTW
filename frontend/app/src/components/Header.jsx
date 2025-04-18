@@ -4,9 +4,6 @@ import { CiSearch } from 'react-icons/ci';
 
 import { Link } from 'react-router';
 
-import { MdLanguage } from 'react-icons/md';
-
-
 import { HiBars3 } from 'react-icons/hi2';
 import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
 import { MdOutlineManageAccounts } from "react-icons/md";

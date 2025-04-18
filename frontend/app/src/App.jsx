@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 
 import Layout from '@/components/Layout';
 import Homepge from '@/pages/Homepge'; 
