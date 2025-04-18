@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Link, useParams, useNavigate } from 'react-router-dom';
+import { Route, Routes, Link, useParams, useNavigate } from 'react-router';
 import '@/styles/Product.css';
 import products from '@/data/inforProduct.jsx';
 import cartIcon from '@/data/img/cart.jpg';

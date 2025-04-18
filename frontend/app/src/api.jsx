@@ -76,3 +76,14 @@ export const getUserInfo = async () => {
         return error.response.data;
     }
 }
+
+export const sendContactForm = async ({ full_name, email, phoneNo, content }) => {
+    try {
+        const response = await instance.post(`${API_URL}/contact`, { full_name, email, phoneNo, content });
+        return response.data;
+    }
+    catch (error) {
+        // console.error("Send contact form error:", error);
+        return error.response.data;
+    }
+}
