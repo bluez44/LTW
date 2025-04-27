@@ -1,13 +1,11 @@
 import { useRef, useState } from 'react';
 import '@/styles/AboutUs-icon.css'
 import '@/styles/AboutUs.css'
+import milestones from "../data/aboutUs/milestone.json"
 
 const AboutUs = () => {
     const [selectedTab, setSelectedTab] = useState('challenge')
-    const [isShowMilestone0, setIsShowMileStone0] = useState(false)
-    const [isShowMilestone1, setIsShowMileStone1] = useState(false)
-    const [isShowMilestone2, setIsShowMileStone2] = useState(false)
-    const [isShowMilestone3, setIsShowMileStone3] = useState(false)
+    const [isShowMilestones, setIsShowMilestones] = useState({})
 
     const targetSection = useRef(null)
 
@@ -16,11 +14,11 @@ const AboutUs = () => {
     }
 
     const handleShowMilestone = (index) => {
-        if(index === 0) setIsShowMileStone0(!isShowMilestone0)
-        else if (index === 1) setIsShowMileStone1(!isShowMilestone1)
-        else if (index === 2) setIsShowMileStone2(!isShowMilestone2)
-        else setIsShowMileStone3(!isShowMilestone3)
-    }
+        setIsShowMilestones((prev) => ({
+          ...prev,
+          [index]: !prev[index],
+        }));
+      };
 
     const handleTabClick = (event, tab) =>{
         event.preventDefault();
@@ -101,13 +99,33 @@ const AboutUs = () => {
                 <div className="container-2">
                     <h4 className="milestone-h4" >Cột mốc chính</h4>
                     <div className="content-2">
-                        <div className="content-2-wrapper">
+                        {milestones.map((milestone,index) => (
+                            <div className='content-2-wrapper' key={index}>
+                                <div className={`${index === 0? 'arrow': ''} milestone-point ${isShowMilestones[index.toString()]? 'show-milestone-background' : ''}`}>
+                                    <img data-src="//corp.vcdn.vn/upload/vng/source/Milestone/MILESTONE-05.png" alt="" src="//corp.vcdn.vn/upload/vng/source/Milestone/MILESTONE-05.png"/>
+                                        <div className='description'>
+                                            <div className={`milestone-content ${isShowMilestones[index.toString()]? 'show-milestone' : ''}`}>
+                                                <h6 style={{color: "#eb5a26"}}>{milestone.time}</h6>
+                                                <h3>{milestone.title}</h3>
+                                                {milestone.submilestones.map((submilestone) => (
+                                                    <p style={{ whiteSpace: 'pre-line' }}>
+                                                        <span style={{fontWeight: 'bold'}}>{submilestone.time}</span>
+                                                        {submilestone.content}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                            <a className="" onClick={() => handleShowMilestone(index.toString())}>{isShowMilestones[index.toString()]? 'Thu gọn' : 'Xem thêm'}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                        {/* <div className="content-2-wrapper">
                             <div className={` arrow milestone-point ${isShowMilestone0? 'show-milestone-background' : ''}`}><img className="" data-src="//corp.vcdn.vn/upload/vng/source/Milestone/MILESTONE-05.png" alt="" src="//corp.vcdn.vn/upload/vng/source/Milestone/MILESTONE-05.png"/>
                                 <div className="description">
                                     <div className={`milestone-content ${isShowMilestone0? 'show-milestone' : ''}`}>
                                         <h6 className="" style={{color: "#eb5a26"}}>2022 - Nay</h6>
                                         <h3>Trí tuệ nhân tạo</h3>
-                                        <p className=""><span className="bold">2024:</span><br/>- 2 năm liên tiếp được vinh danh "Nơi làm việc xuất sắc" - Great Place to Work.<br/>- Ra mắt trung tâm dữ liệu AI Cloud GreenNode tại Bangkok, một trong những trung tâm AI Cloud quy mô lớn đầu tiên của Đông Nam Á.&nbsp;<br/>- VNGGames nhận giải Nhà phát hành xuất sắc năm thứ hai liên tiếp tại giải thưởng Game Việt Nam (Vietnam Game Award).<br/>- Zalo trở thành ứng dụng nhắn tin phổ biến nhất tại Việt Nam với 78 triệu người dùng thường xuyên hàng tháng.<br/>- Zalopay công bố nhận diện thương hiệu mới và định hướng phát triển "Mới và Mở".<br/>- VNG hợp tác với ST Telemedia Global Data Centres (STT GDC) xây dựng và vận hành trung tâm dữ liệu chuẩn quốc tế tại TP. Hồ Chí Minh.<br/>- Kiki Auto cán mốc 1 triệu lượt cài đặt trên ô tô.&nbsp;&nbsp;<br/><span className="bold">2023:</span><br/>- Được vinh danh bởi nhiều giải thưởng uy tín toàn cầu của Nikkei Asia, Great Place To Work®, Asia Pacific Enterprise Awards.<br/>- Nộp hồ sơ F-1 lên Ủy ban Giao dịch chứng khoán Hoa Kỳ (SEC).<br/>- Mã chứng khoán VNZ của công ty chính thức giao dịch trên sàn UpCom (Việt Nam), trở thành mã chứng khoán có trị giá cao nhất trên thị trường.&nbsp;<br/>- Mở rộng nỗ lực "Go Global" với 3 văn phòng mới tại Đài Bắc, Thượng Hải, Bắc Kinh.<br/>- Zalo 3 năm liên tiếp là ứng dụng liên lạc phổ biến nhất Việt Nam, theo báo cáo "The Connected Consumer Q4 2022".<br/>- Zalo AI phát triển hạ tầng mạnh nhất Việt Nam với 8 DGX H100, ra mắt mô hình LLM 7 tỷ tham số vượt trội GPT 3.5.<br/>- Gen AI Avatar của Zalo đạt 6,8 triệu người dùng, Kiki Auto có 600.000 lượt cài đặt trên ô tô.<br/>- Đổi tên Quỹ VNIF thành Quỹ Kiến tạo Ước mơ (DMF), hỗ trợ lĩnh vực Y tế, Giáo dục, Công nghệ.&nbsp;<br/><strong>2022:</strong><br/>- Ra mắt bộ logo mới, giữ vững tinh thần đón nhận thách thức.&nbsp;<br/>- Khánh thành VNG Data Center tại TP.HCM, đạt chứng chỉ Uptime Tier III.<br/>- Zalo trở thành Ứng dụng liên lạc hàng đầu của người Việt (theo Decision Lab), lọt Top 200 ứng dụng miễn phí được yêu thích nhất (theo Apple).<br/>- Zalo AI phát triển ứng dụng định danh điện tử (eKYC) trên Zalo.<br/>- Game của VNGGames phát hành được lựa chọn thi đấu tại SEA Games 31. Thành tích của đội tuyển eSports Việt Nam tại kỳ SEA Games này là 4 HCV, 3 HCB.<br/>- Zalopay chạm cột mốc 10 triệu người dùng thường xuyên.</p>
+                                        <p className=""><span style={{fontWeight: 'bold'}}>2024:</span><br/>- 2 năm liên tiếp được vinh danh "Nơi làm việc xuất sắc" - Great Place to Work.<br/>- Ra mắt trung tâm dữ liệu AI Cloud GreenNode tại Bangkok, một trong những trung tâm AI Cloud quy mô lớn đầu tiên của Đông Nam Á.&nbsp;<br/>- VNGGames nhận giải Nhà phát hành xuất sắc năm thứ hai liên tiếp tại giải thưởng Game Việt Nam (Vietnam Game Award).<br/>- Zalo trở thành ứng dụng nhắn tin phổ biến nhất tại Việt Nam với 78 triệu người dùng thường xuyên hàng tháng.<br/>- Zalopay công bố nhận diện thương hiệu mới và định hướng phát triển "Mới và Mở".<br/>- VNG hợp tác với ST Telemedia Global Data Centres (STT GDC) xây dựng và vận hành trung tâm dữ liệu chuẩn quốc tế tại TP. Hồ Chí Minh.<br/>- Kiki Auto cán mốc 1 triệu lượt cài đặt trên ô tô.&nbsp;&nbsp;<br/><span style={{fontWeight: 'bold'}}>2023:</span><br/>- Được vinh danh bởi nhiều giải thưởng uy tín toàn cầu của Nikkei Asia, Great Place To Work®, Asia Pacific Enterprise Awards.<br/>- Nộp hồ sơ F-1 lên Ủy ban Giao dịch chứng khoán Hoa Kỳ (SEC).<br/>- Mã chứng khoán VNZ của công ty chính thức giao dịch trên sàn UpCom (Việt Nam), trở thành mã chứng khoán có trị giá cao nhất trên thị trường.&nbsp;<br/>- Mở rộng nỗ lực "Go Global" với 3 văn phòng mới tại Đài Bắc, Thượng Hải, Bắc Kinh.<br/>- Zalo 3 năm liên tiếp là ứng dụng liên lạc phổ biến nhất Việt Nam, theo báo cáo "The Connected Consumer Q4 2022".<br/>- Zalo AI phát triển hạ tầng mạnh nhất Việt Nam với 8 DGX H100, ra mắt mô hình LLM 7 tỷ tham số vượt trội GPT 3.5.<br/>- Gen AI Avatar của Zalo đạt 6,8 triệu người dùng, Kiki Auto có 600.000 lượt cài đặt trên ô tô.<br/>- Đổi tên Quỹ VNIF thành Quỹ Kiến tạo Ước mơ (DMF), hỗ trợ lĩnh vực Y tế, Giáo dục, Công nghệ.&nbsp;<br/><strong>2022:</strong><br/>- Ra mắt bộ logo mới, giữ vững tinh thần đón nhận thách thức.&nbsp;<br/>- Khánh thành VNG Data Center tại TP.HCM, đạt chứng chỉ Uptime Tier III.<br/>- Zalo trở thành Ứng dụng liên lạc hàng đầu của người Việt (theo Decision Lab), lọt Top 200 ứng dụng miễn phí được yêu thích nhất (theo Apple).<br/>- Zalo AI phát triển ứng dụng định danh điện tử (eKYC) trên Zalo.<br/>- Game của VNGGames phát hành được lựa chọn thi đấu tại SEA Games 31. Thành tích của đội tuyển eSports Việt Nam tại kỳ SEA Games này là 4 HCV, 3 HCB.<br/>- Zalopay chạm cột mốc 10 triệu người dùng thường xuyên.</p>
                                     </div>
                                     <a className="" onClick={() => handleShowMilestone(0)}>{isShowMilestone0? 'Thu gọn' : 'Xem thêm'}</a>
                                 </div>
@@ -150,9 +168,9 @@ const AboutUs = () => {
                                         <a className="" onClick={() => handleShowMilestone(3)}>{isShowMilestone3? 'Thu gọn' : 'Xem thêm'}</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>                    
-                    </div>
+                            </div> */}
+                    </div>                    
+                </div>
             </section>
             <section className="managers" id="">
                 <div className="content-3">
