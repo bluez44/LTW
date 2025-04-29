@@ -1,27 +1,152 @@
 import { useEffect, useRef, useState } from "react"
-import "@/styles/FAQ-icon.css"
-import "@/styles/FAQ.css"
-import userImage from "@/assets/user.jpg"
-import listFAQ from "@/mockups/FAQ"
+import "../styles/FAQ-icon.css"
+import "../styles/FAQ.css"
+import userImage from "../assets/user.jpg"
+import axios from "axios"
+
 
 
 const FAQ = () => {
     const [filterState, setFilterState] = useState("all")
     const [faqs, setFaqs] = useState([])
+    const [search, setSearch] = useState("")
+    const [totalQuestion, setTotalQuestion] = useState(0)
     const [openedAnswers, setOpenedAnswers] = useState([]);
+    const [listAnswers, setListAnswers] = useState({})
+    const [listTextAreaAnswers, setListTextAreaAnswers] = useState({}) 
+    const [isCreateQuestion, setIsCreateQuestion] = useState(false)
+    const [titleInputQuestion, setTitleInputQuestion] = useState("")
+    const [contentInputQuestion, setContentInputQuestion] = useState("")
     const targetSection = useRef(null)
+    const createQuestionTarget = useRef(null)
+
     const scrollDown = () => {
         if(targetSection.current) targetSection.current.scrollIntoView({behavior: "smooth"})
     }
 
-    const toggleAnswer = (index) => {
+    const handleOpenFormCreate = () => {
+        setIsCreateQuestion(true)
+        setTimeout(() => scrollDownCreateQuestionForm(), 100);
+    }
+
+    const scrollDownCreateQuestionForm = () => {
+        if (createQuestionTarget.current) {
+            createQuestionTarget.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    const removeVietnameseTones = (str) => {
+        return str.normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+            .replace(/đ/g, "d")
+            .replace(/Đ/g, "D")
+            .toLowerCase();
+    };
+
+    const handleFilter = async (filter) => {
+        setFilterState(filter)
+        try {
+            fetchTotalQuestion(filter, search);
+            setFaqs([])
+            setOpenedAnswers([])
+            fetchInitFAQs(filter, search)
+        } catch (error) {
+            
+        }
+    }
+
+    const handleCreateQuestion =  async () => {
+        if(contentInputQuestion === "" || titleInputQuestion === ""){
+            alert("Nhập đầy đủ tiêu đề và nội dung câu hỏi trước khi gửi")
+            return
+        }
+        try {
+            const response = await axios.post("http://localhost/backend/app/controllers/questions/create-question.php", {
+                account_id: 1,
+                title: titleInputQuestion,
+                content: contentInputQuestion,
+            })
+            if(response.data.status === 'success'){
+                setSearch("")
+                fetchInitFAQs("all", "")
+                setFilterState("all")
+                setContentInputQuestion("")
+                setTitleInputQuestion("")
+                fetchTotalQuestion("all", "")
+                setIsCreateQuestion(false)
+            }
+        } catch (error) {
+            setIsCreateQuestion(false)
+        }
+    }
+
+    const fetchAnswersOfQuestion = async (question_id) =>{
+        try {
+            const response = await axios.get(`http://localhost/backend/app/controllers/answers/get-answers.php?question_id=${question_id}`)
+            setListAnswers(prevList => ({
+                ...prevList,
+                [question_id]: response.data
+            }))
+        } catch (error) {
+            
+        }
+    }
+
+    const toggleAnswer = async (index, question_id) => {
         if (!openedAnswers.includes(index)) {
+            await fetchAnswersOfQuestion(question_id)
             setOpenedAnswers([...openedAnswers, index]);
         } else{
             setOpenedAnswers(openedAnswers.filter(i => i !== index))
         }
     };
 
+    const handleDeleteAnswer = async (answer_id, question_id) => {
+        const confirm = window.confirm("Bạn có chắc muốn xóa câu trả lời này?")
+
+        if(!confirm) return
+
+        try {
+            const response = await axios.delete(`http://localhost/backend/app/controllers/answers/delete-answer.php?answer_id=${answer_id}`)
+
+            if(response.data.status === 'success'){
+                fetchAnswersOfQuestion(question_id)
+            }
+        } catch (error) {
+            
+        }
+    }
+
+    const handleAnswer = async (question_id) => {
+        if (listTextAreaAnswers[question_id] === undefined){
+            alert("Vui lòng nhập câu trả lời trước khi gửi")
+            return
+        }
+        try {
+            const response = await axios.post(`http://localhost/backend/app/controllers/answers/create-answer.php`, {
+                account_id: 1,
+                question_id,
+                content: listTextAreaAnswers[question_id]
+            })
+            if (response.data.status === "success"){
+                
+                handleTypeAnswer("",question_id)
+                fetchAnswersOfQuestion(question_id)
+            }
+        } catch (error) {
+        }
+    }
+
+    const handleSearch = async (str) => {
+        setSearch(str)
+        const normalizedSearch = removeVietnameseTones(str);
+        try {
+            fetchTotalQuestion(filterState, normalizedSearch)
+            fetchInitFAQs(filterState, normalizedSearch)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const timeAgo = (date) => {
         const now = new Date();
@@ -42,11 +167,71 @@ const FAQ = () => {
         return `${years} năm trước`;
     };
 
-    useEffect(() => {
-        setFaqs(listFAQ)
-    })
+    const fetchMoreFAQs = async (filter, searchText) => {
+        try {
+            const response = await axios.get(`http://localhost/backend/app/controllers/questions/get-10-questions.php?offset=${faqs.length}&limit=${faqs.length + 10}&filter=${filter}&search=${searchText}`)
+            setFaqs(prevFAQs => [...prevFAQs, ...response.data])
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setFaqs([])
+        }
+    }
+
+    const fetchInitFAQs = async (filter, searchText) => {
+        try {
+            const response = await axios.get(`http://localhost/backend/app/controllers/questions/get-10-questions.php?offset=0&limit=10&filter=${filter}&search=${searchText}`)
+            setFaqs(response.data)
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setFaqs([])
+        }
+    }
+
+    const fetchTotalQuestion = async (filter, searchText) => {
+        try {
+            const response = await axios.get(`http://localhost/backend/app/controllers/questions/count.php?filter=${filter}&search=${searchText}`)
+            setTotalQuestion(response.data) 
+        } catch (error) {
+            console.error("Fetch error:", error);
+            setTotalQuestion(0)
+
+        }
+    }
+
+    const handleDeleteQuestion = async (question_id, index) =>{
+        const confirm = window.confirm("Bạn có chắc muốn xóa câu hỏi này không?")
+        if (!confirm) return
+
+        try {
+            const response = await axios.delete(`http://localhost/backend/app/controllers/questions/delete-question.php?question_id=${question_id}`)
+            if(response.data.status === 'success'){
+                if(faqs.length < 10) {
+                    fetchInitFAQs(filterState, search)
+                }else{
+                    setFaqs(faqs.filter(faq => faq.question_id !== question_id))
+                }
+                setOpenedAnswers(openedAnswers.filter(openedAnswer => openedAnswer !== index))
+                fetchTotalQuestion(filterState, search)
+            }
+        } catch (error) {
+            
+        }
+    }
+
+    const handleTypeAnswer = (text, question_id) => {
+        setListTextAreaAnswers(prev => ({
+            ...prev,
+            [question_id]: text
+        }))
+    }
+
+    useEffect( () => {
+        fetchInitFAQs("all", "")
+        fetchTotalQuestion("all", "")
+    }, [])
     return(
         <div className="container-faq">
+
             <section className="banner">
                 <div className="banner-container">
                     <div className="banner-wrapper">
@@ -69,73 +254,130 @@ const FAQ = () => {
             <section className="faq" ref={targetSection}>
                 <div className="option-bar">
                     <div className="search-option">
-                        <input type="text" placeholder="Nhập từ khóa bạn muốn tìm...">
+                        <input type="text" placeholder="Nhập từ khóa bạn muốn tìm..." value={search} onChange={(e) => handleSearch(e.target.value)}>
                         </input>
                         <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.78 13.78"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M5.56 11.12a5.56 5.56 0 1 1 5.56-5.56 5.56 5.56 0 0 1-5.56 5.56ZM5.56 1a4.56 4.56 0 1 0 4.56 4.56A4.57 4.57 0 0 0 5.56 1Z" className="search-1"></path><path d="M13.28 13.78a.51.51 0 0 1-.36-.15L8.81 9.52a.5.5 0 1 1 .71-.71l4.11 4.11a.5.5 0 0 1 0 .71.49.49 0 0 1-.35.15Z" className="search-1"></path></g></g></svg>
-                        <p className="faq-number">{faqs.length} Câu hỏi</p>
+                        <p className="faq-number">{totalQuestion} Câu hỏi</p>
                     </div>
                     <div className="filter-option">
                         <div className="filter-wrapper">
-                            <a className={`${filterState === 'all'? 'filter-option-active': ''}`} onClick={() => setFilterState("all")}>Tất cả</a>
-                            <a className={`${filterState === 'unanswer'? 'filter-option-active': ''}`} onClick={() => setFilterState("unanswer")}>Chưa trả lời</a>
-                            <a className={`${filterState === 'answered'? 'filter-option-active': ''}`} onClick={() => setFilterState("answered")}>Đã trả lời</a>
+                            <a className={`${filterState === 'all'? 'filter-option-active': ''}`} onClick={() => handleFilter("all")}>Tất cả</a>
+                            <a className={`${filterState === 'unanswer'? 'filter-option-active': ''}`} onClick={() => handleFilter("unanswer")}>Chưa trả lời</a>
+                            <a className={`${filterState === 'answered'? 'filter-option-active': ''}`} onClick={() => handleFilter("answered")}>Đã trả lời</a>
                         </div>
                     </div>
-                    <p className="faq-number-mobile">{faqs.length} Câu hỏi</p>
+                    <p className="faq-number-mobile">{totalQuestion} Câu hỏi</p>
                 </div>
 
                 <div className="list-faq">
                     {faqs.map((faq, index) => (
-                        <div className="faq-container">
+                        <div key={index} className="faq-container">
                             <div className="faq-info">
                                 <div className="faq-info-container">
                                     <img src={userImage}/>
                                     <div className="username-time">
-                                        <p className="username-question">{faq.username}</p>
-                                        <p className="time-question" style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>{timeAgo(faq.create_at)}</p>
+                                        <p className="username-question">{faq.first_name} {faq.last_name}</p>
+                                        <p className="time-question" style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>
+                                            {faq.create_at ? timeAgo(new Date(faq.create_at)) : "Không rõ thời gian"}
+                                        </p>
                                     </div>
+                                </div>
+                                <div className="answer-option">
+                                    <a>Chỉnh sửa</a>
+                                    <p>|</p>
+                                    <a onClick={() => handleDeleteQuestion(faq.question_id, index)}>Xóa</a>
                                 </div>
                             </div>
                             <div className="faq-content">
-                                <p className="question-tittle" style={{fontWeight: "bold"}}>{faq.tittle}</p>
+                                <p className="question-tittle" style={{fontWeight: "bold"}}>{faq.title}</p>
                                 <p className="question-content">{faq.content}</p>
                             </div>
                             <div style={{borderBlockStart: "1px solid rgba(0, 0, 0, 0.2)", marginBottom: "10px", marginTop: "15px"}}></div>
                             {openedAnswers.includes(index) && (
                                 <>
-                                     <div className="answer-section">
-                                        <div className="answer-container">
-                                            <div className="answer-info">
-                                                <img src={userImage}/>
-                                                <div className="username-time">
-                                                    <p className="username-answer">Đặng Tiến Đạt</p>
-                                                    <p className="time-answer"style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>1 tháng trước</p>
-                                                </div>
+                                    <div className="answer-section">
+                                        {listAnswers[faq.question_id].map((answer, ansIdx) => (
+                                            <div key={ansIdx}>
+                                                <div className="answer-container">
+                                                    <div className="top-answer-section">
+                                                        <div className="answer-info">
+                                                            <img src={userImage}/>
+                                                            <div className="username-time">
+                                                                <p className="username-answer">{answer.first_name} {answer.last_name}</p>
+                                                                <p className="time-answer"style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>{timeAgo(new Date(answer.create_at))}</p>
+                                                            </div>
+                                                        </div>
+                                                        {answer.account_id === "1" && (<div className="answer-option">
+                                                            <a>Chỉnh sửa</a>
+                                                            <p>|</p>
+                                                            <a onClick={() => handleDeleteAnswer(answer.answer_id, answer.question_id)}>Xóa</a>
+                                                        </div>)}
+                                                    </div>
+                                                    <p style={{marginBlockStart: "10px"}}>{answer.content}</p>
+                                                </div> 
                                             </div>
-                                            <p style={{marginBlockStart: "10px"}}>Em chỉ việc gửi qua mail của công ty thì tự động sẽ có mail phản hồi kết quả thôi em nhé</p>
-                                        </div>
+                                        ))}
                                         <div className="answer-input">
-                                            <textarea rows={4} placeholder="Viết câu trả lời của bạn..."/>
+                                            <textarea 
+                                            rows={4} 
+                                            placeholder="Viết câu trả lời của bạn..." 
+                                            onChange={(e) => handleTypeAnswer(e.target.value, faq.question_id)}     
+                                            value={listTextAreaAnswers[faq.question_id] || ""}/>
+                                            <button className="submit-button" onClick={() => handleAnswer(faq.question_id)}>Gửi</button>
                                         </div>
                                     </div>
                                     <div style={{borderBlockStart: "1px solid rgba(0, 0, 0, 0.2)", marginBottom: "10px", marginTop: "5px"}}></div>
-            
                                 </>
                             )}
                             
                             <div className="faq-answer">
-                                <p style={{color: "gray"}}>X câu trả lời</p>
-                                <button type="button" className="answer-btn" onClick={() => toggleAnswer(index)}>{openedAnswers.includes(index)? "Thu gọn" : "Trả lời"}</button>
-                            </div>  
+                                <p style={{color: "gray"}}>{faq.answer_count} câu trả lời</p>
+                                <button type="button" className="answer-btn" onClick={() => toggleAnswer(index, faq.question_id)}>{openedAnswers.includes(index)? "Thu gọn" : "Trả lời"}</button>
+                            </div> 
                         </div> 
                     ))}
-                    <div className="more">
-                        <button className="more-btn">Xem thêm</button>
-                    </div>
+                    {faqs.length < totalQuestion && (
+                        <div className="more">
+                            <button className="more-btn" onClick={() => fetchMoreFAQs(filterState, search)}>Xem thêm</button>
+                        </div>)
+                    }
                 </div>
+                {isCreateQuestion ? (
+                    <div ref={createQuestionTarget} className="create-question-container" style={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                        <div className="create-question-form">
+                            <p style={{textAlign: "center", fontWeight: "bold", fontSize: "24px"}}>Đặt câu hỏi</p>
+                            <div>
+                                <label>Tiêu đề</label>
+                                <input 
+                                type="text" 
+                                placeholder="Nhập tiêu đề cho câu hỏi..." 
+                                value={titleInputQuestion} 
+                                onChange={(e) => setTitleInputQuestion(e.target.value)}/>
+                            </div>
+                
+                            <div>
+                                <label>Nội dung</label>
+                                <textarea 
+                                rows={5} 
+                                placeholder="Nhập nội dung cho câu hỏi..."
+                                value={contentInputQuestion} 
+                                onChange={(e) => setContentInputQuestion(e.target.value)}></textarea>
+                            </div>
+                
+                            <div className="create-question-option">
+                                <button className="cancel-btn" onClick={() => setIsCreateQuestion(false)}>Hủy</button>
+                                <button className="submit-button" onClick={() => handleCreateQuestion()}>Gửi</button>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <button className="create-new-question" onClick={() => handleOpenFormCreate()}>Đặt câu hỏi mới</button>
+                )}
+                
             </section>
         </div>
     )
 }
+
 
 export default FAQ

@@ -8,6 +8,21 @@
     }
 }
 
+@keyframes downto-create {
+    0% {
+        bottom: 0px;
+    }
+    
+    50% {
+        bottom: 30px ;
+        
+    }
+
+    100% {
+        bottom: -5px;
+    }
+}
+
 
 p{
     margin-block-end: 0px;
@@ -142,7 +157,7 @@ h2 {
     position: relative;
     display: block;
     height: auto;
-    width: 95%;
+    width: 98%;
     padding: 25px;
     margin: 10px;
     border-radius: 25px;
@@ -160,6 +175,10 @@ h2 {
     flex: 1;
 }
 
+.search-option{
+    position: relative;
+}
+
 .search-option > input {
     width: 70%;
     height: 40px;
@@ -173,7 +192,7 @@ h2 {
 .search-option > svg{
     width: 25px;
     position: absolute;
-    right: 62vw;
+    right: 15vw;
 
 }
 
@@ -241,12 +260,12 @@ h2 {
 
 .faq-info-container{
     display: flex;
+
 }
 
 .faq-info{
     display: flex;
-    justify-content: start;
-    align-items: center;
+    justify-content: space-between;
     margin-bottom: 5px;
 }
 
@@ -361,10 +380,64 @@ h2 {
     border-radius: 5px;
     display: inline-block;
     position: relative;
+    width: 100%;
+}
+
+.top-answer-section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer-option{
+    display: flex;
+    gap: 5px;
+}
+
+.answer-option > a{
+    font-style: italic;
+    font-size: 14px;
+}
+
+.answer-option > a:hover{
+    scale: 110%;
+}
+
+.answer-option > a:active{
+    scale: 90%;
+}
+
+.create-new-question{
+    padding: 10px;
+    position: sticky;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #eb5a26;
+    box-shadow: 5px 2px 3px 3px rgba(0, 0, 0, 0.3);
+    animation: downto-create 1s infinite;
+}
+
+.create-new-question:hover{
+    box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+    scale: 110%;
+}
+
+.create-new-question:active{
+    box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+    scale: 90%;
 }
 
 .answer-input{
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px
 }
 
 .answer-input > textarea{
@@ -416,7 +489,7 @@ h2 {
     }
 
     .faq{
-        width: 90%;
+        width: 95%;
     }
 
     .question-tittle{
@@ -433,10 +506,6 @@ h2 {
 
     .search-option > input::placeholder {
         font-size: 16px;
-    }
-
-    .search-option > svg{
-        right: 59vw;
     }
 
     .filter-wrapper > a{
@@ -533,4 +602,84 @@ h2 {
     .faq-answer{
         justify-content: space-between;
     }
+
+    .create-question-form{
+        width: 100% !important;
+    }
+}
+
+.submit-button{
+    padding: 5px 15px;
+    background-color: #eb5a26;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none
+}
+
+.submit-button:hover{
+    border: 2px solid #eb5a26;
+    background-color: white;
+    color: #eb5a26;
+}
+
+.submit-button:active{
+    border: 2px solid #eb5a26;
+    background-color: white;
+    color: #eb5a26;
+    scale: 90%;
+}
+
+.create-question-form{
+    width: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid gray;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px
+}
+
+.create-question-form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-question-form > div >label{
+    font-size: 18px;
+}
+
+.create-question-form > div >input::placeholder,
+.create-question-form > div >textarea::placeholder{
+    font-style: italic;
+}
+
+.create-question-form > div >textarea, 
+.create-question-form > div > input{
+    padding-left: 5px;
+    border-radius: 10px;
+}
+
+
+.create-question-option{
+    gap: 10px;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: end;
+}
+
+.cancel-btn{
+    padding: 5px 15px;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none
+}
+
+.cancel-btn:hover, .cancel-btn:active{
+    background-color: white;
+    color: gray;
+    border: 2px solid gray
 }
