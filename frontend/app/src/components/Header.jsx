@@ -45,7 +45,7 @@ function Header() {
 
   const [userInfo, setUserInfo] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchUser = async () => {
       const res = await getUserInfo();
       return res;
@@ -61,7 +61,7 @@ function Header() {
         setUserInfo(null);
       }
     })
-  }, [])
+  }, [userInfo])
 
   window.addEventListener('click', (e) => {
     if (isShowAction) {
