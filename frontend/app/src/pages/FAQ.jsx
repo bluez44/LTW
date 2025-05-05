@@ -4,8 +4,6 @@ import "../styles/FAQ.css"
 import userImage from "../assets/user.jpg"
 import axios from "axios"
 
-
-
 const FAQ = () => {
     const [filterState, setFilterState] = useState("all")
     const [faqs, setFaqs] = useState([])
@@ -61,7 +59,7 @@ const FAQ = () => {
             return
         }
         try {
-            const response = await axios.post("http://localhost/backend/app/controllers/questions/create-question.php", {
+            const response = await axios.post("http://localhost:85/LTW_ASS/backend/app/public/create-question", {
                 account_id: 1,
                 title: titleInputQuestion,
                 content: contentInputQuestion,
@@ -82,7 +80,7 @@ const FAQ = () => {
 
     const fetchAnswersOfQuestion = async (question_id) =>{
         try {
-            const response = await axios.get(`http://localhost/backend/app/controllers/answers/get-answers.php?question_id=${question_id}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-answers?question_id=${question_id}`)
             setListAnswers(prevList => ({
                 ...prevList,
                 [question_id]: response.data
@@ -107,7 +105,7 @@ const FAQ = () => {
         if(!confirm) return
 
         try {
-            const response = await axios.delete(`http://localhost/backend/app/controllers/answers/delete-answer.php?answer_id=${answer_id}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/delete-answer?answer_id=${answer_id}`)
 
             if(response.data.status === 'success'){
                 fetchAnswersOfQuestion(question_id)
@@ -123,7 +121,7 @@ const FAQ = () => {
             return
         }
         try {
-            const response = await axios.post(`http://localhost/backend/app/controllers/answers/create-answer.php`, {
+            const response = await axios.post(`http://localhost:85/LTW_ASS/backend/app/public/create-answer`, {
                 account_id: 1,
                 question_id,
                 content: listTextAreaAnswers[question_id]
@@ -169,7 +167,7 @@ const FAQ = () => {
 
     const fetchMoreFAQs = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost/backend/app/controllers/questions/get-10-questions.php?offset=${faqs.length}&limit=${faqs.length + 10}&filter=${filter}&search=${searchText}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-10-questions?offset=${faqs.length}&limit=${faqs.length + 10}&filter=${filter}&search=${searchText}`)
             setFaqs(prevFAQs => [...prevFAQs, ...response.data])
         } catch (error) {
             console.error("Fetch error:", error);
@@ -179,7 +177,7 @@ const FAQ = () => {
 
     const fetchInitFAQs = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost/backend/app/controllers/questions/get-10-questions.php?offset=0&limit=10&filter=${filter}&search=${searchText}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-10-questions?offset=0&limit=10&filter=${filter}&search=${searchText}`)
             setFaqs(response.data)
         } catch (error) {
             console.error("Fetch error:", error);
@@ -189,7 +187,7 @@ const FAQ = () => {
 
     const fetchTotalQuestion = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost/backend/app/controllers/questions/count.php?filter=${filter}&search=${searchText}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/count?filter=${filter}&search=${searchText}`)
             setTotalQuestion(response.data) 
         } catch (error) {
             console.error("Fetch error:", error);
@@ -203,7 +201,7 @@ const FAQ = () => {
         if (!confirm) return
 
         try {
-            const response = await axios.delete(`http://localhost/backend/app/controllers/questions/delete-question.php?question_id=${question_id}`)
+            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/delete-question?question_id=${question_id}`)
             if(response.data.status === 'success'){
                 if(faqs.length < 10) {
                     fetchInitFAQs(filterState, search)
@@ -214,7 +212,7 @@ const FAQ = () => {
                 fetchTotalQuestion(filterState, search)
             }
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
@@ -247,9 +245,9 @@ const FAQ = () => {
                         </div>
                     </div>
                 </div>
-                <a className="scroll-down" onClick={scrollDown}>
+                {/* <a className="scroll-down" onClick={scrollDown}>
                     <span className="svg" data-icon="arrow-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle cx="20" cy="20" r="20" fill="#4d4d4d"></circle><path d="M20 24.5a.5.5 0 0 1-.5-.5V12a.5.5 0 0 1 1 0v12a.5.5 0 0 1-.5.5Z" className="cls-2"></path><path d="M20 28.5a.52.52 0 0 1-.38-.17l-3.5-4a.5.5 0 1 1 .76-.66L20 27.24l3.12-3.57a.5.5 0 0 1 .76.66l-3.5 4a.52.52 0 0 1-.38.17Z" className="cls-2"></path></g></g></svg></span>
-                </a>
+                </a> */}
             </section>
             <section className="faq" ref={targetSection}>
                 <div className="option-bar">
@@ -307,7 +305,7 @@ const FAQ = () => {
                                                                 <p className="time-answer"style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>{timeAgo(new Date(answer.create_at))}</p>
                                                             </div>
                                                         </div>
-                                                        {answer.account_id === "1" && (<div className="answer-option">
+                                                        {answer.account_id === 1 && (<div className="answer-option">
                                                             <a>Chỉnh sửa</a>
                                                             <p>|</p>
                                                             <a onClick={() => handleDeleteAnswer(answer.answer_id, answer.question_id)}>Xóa</a>
