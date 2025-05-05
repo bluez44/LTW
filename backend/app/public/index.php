@@ -13,6 +13,7 @@ require_once __DIR__ . '/../controllers/GuestController.php';
 require_once __DIR__ . '/../controllers/QuestionController.php';
 require_once __DIR__ . '/../controllers/AnswerController.php';
 
+
 if ($path === $url . '/login' && $method === 'POST') {
     login();
 } elseif ($path === $url . '/register' && $method === 'POST') {
@@ -25,6 +26,10 @@ if ($path === $url . '/login' && $method === 'POST') {
     adminLogin();
 } elseif ($path === $url . '/admin/register' && $method === 'POST') {
     adminRegister();
+} elseif ($path === $url . '/admin/profile' && $method === 'GET') {
+    adminProfile();
+} elseif ($path === $url . '/admin/contact' && $method === 'GET') {
+    getAllContacts();
 } elseif ($path === $url . '/contact' && $method === 'POST') {
     sendContactForm();
 } elseif ($path === $url . '/get-10-questions' && $method === 'GET'){
@@ -41,7 +46,7 @@ if ($path === $url . '/login' && $method === 'POST') {
     createAnswer();
 } elseif ($path === $url . '/delete-answer' && $method === 'GET'){
     deleteAnswerById();
-} 
+}
 else {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found ' . $path . " " . $method]);
