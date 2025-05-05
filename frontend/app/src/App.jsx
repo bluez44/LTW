@@ -14,6 +14,10 @@ import Register from '@/pages/auth/Register';
 import AdminLogin from '@/pages/auth/AdminLogin';
 import AdminLayout from '@/components/admin/AdminLayout';
 import Home from '@/pages/Admin/Home';
+import Contact from '@/pages/Admin/Contact';
+import AdminFAQ from '@/pages/Admin/AdminFAQ';
+import News from '@/pages/Admin/News';
+import Products from '@/pages/Admin/Products';
 
 function App() {
   return (
@@ -28,12 +32,15 @@ function App() {
 
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<Home />} />
+        <Route path="/admin/contact" element={<Contact />} />
+        <Route path="/admin/faq" element={<AdminFAQ />} />
+        <Route path="/admin/news" element={<News />} />
+        <Route path="/admin/products" element={<Products />} />
       </Route>
-
 
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/reset" element={<ForgotPassword />} />
-      <Route path='/auth/register' element={<Register />} />
+      <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/admin/login" element={<AdminLogin />} />
     </Routes>
   );

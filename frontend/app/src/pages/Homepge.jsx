@@ -21,7 +21,7 @@ function Homepge() {
 
   return (
     <div className="">
-      <section ref={ref} id='section1' className='homepage_section1 mb-5 position-relative'>
+      <section ref={ref} id='section1' className='homepage_section1 position-relative'>
         <img src="https://corp.vcdn.vn/upload/vng/source/Banner/BANNER-01.png" alt="banner" width={'100%'} />
         <div 
           className='position-absolute top-50 start-50 start-sm-50 start-md-30 w-100 h-100 w-sm-auto h-sm-auto translate-middle rounded-sm-4 rounded-0'
@@ -58,11 +58,11 @@ function Homepge() {
 
       </section>
 
-      <section id='section2' className='homepage_section2 position-relative'>
+      <section id='section2' className='homepage_section2 pt-5 position-relative'>
         <div className='position-absolute top-0 start-0 w-100 h-100 z-n1'>
           <img src="https://corp.vcdn.vn/products/vng/skin-2021/dist/main/images/bg/f2.jpg" alt="background" width={'100%'} height={'100%'} />
         </div>
-        <div className="container">
+        <div className="container px-0">
           <p className='fs-3 fw-bold text-vng-secondary'>Sứ mệnh</p>
           <p className='fs-2 fw-bold text-vng-text-bold mw-100 mw-xl-60'>Kiến tạo công nghệ và phát triển con người. Từ Việt Nam vươn tầm thế giới.</p>
           <div className="row py-5">
@@ -91,8 +91,8 @@ function Homepge() {
         </div>
       </section>
 
-      <section className='homepage_section3'>
-        <div className="container">
+      <section className='homepage_section3 pt-5'>
+        <div className="container px-0">
           <p className='fs-3 fw-bold text-vng-secondary mb-4'>Tin tức</p>
           <ul className='d-flex list-unstyled gap-2 mb-4 flex-column flex-md-row'>
             {

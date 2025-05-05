@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS LTW;
 USE LTW;
 
@@ -51,12 +50,15 @@ CREATE TABLE Answer (
 
 CREATE TABLE Contact_form (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    phoneNo VARCHAR(20),
-    email VARCHAR(100),
-    content TEXT,
-    full_name VARCHAR(100),
-    created_at DATETIME
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) DEFAULT 'Chưa xử lý',
+    processed_at DATETIME NULL,
+    content TEXT
 );
+
 
 CREATE TABLE News (
     id INT AUTO_INCREMENT PRIMARY KEY,

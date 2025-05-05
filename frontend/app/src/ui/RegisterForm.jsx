@@ -40,26 +40,26 @@ function RegisterForm() {
         onSubmit={handleSubmit}
     >
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Tên đăng nhập *
             </p>
             <input
                 required
                 name="user_name"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="text"
                 placeholder="Nhập tên đăng nhập"
             />
         </div>
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Mật khẩu *
             </p>
             <div className="position-relative py-2">
                 <input
                     required
                     name="password"
-                    className="outline-none border-none w-100 px-5 py-2"
+                    className="outline-none border-none bg-body w-100 px-5 py-2"
                     type={!isShowPassword ? 'password' : 'text'}
                     placeholder="Nhập mật khẩu"
                 />
@@ -81,14 +81,14 @@ function RegisterForm() {
         </div>
 
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Nhập lại mật khẩu *
             </p>
             <div className="position-relative py-2">
                 <input
                     required
                     name="rePassword"
-                    className="outline-none border-none w-100 px-5 py-2"
+                    className="outline-none border-none bg-body w-100 px-5 py-2"
                     type={!isShowRePassword ? 'password' : 'text'}
                     placeholder="Nhập lại mật khẩu"
                 />
@@ -110,68 +110,68 @@ function RegisterForm() {
         </div>
 
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Email *
             </p>
             <input
                 required
                 name="email"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="email"
                 placeholder="Nhập email"
             />
         </div>
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Họ *
             </p>
             <input
                 required
                 name="last_name"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="text"
                 placeholder="Nhập họ"
             />
         </div>
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Tên *
             </p>
             <input
                 required
                 name="first_name"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="text"
                 placeholder="Nhập tên"
             />
         </div>
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Số điện thoại *
             </p>
             <input
                 required
                 name="phone_number"
                 pattern="[0-9]{10}"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="tel"
                 placeholder="Nhập số điện thoại"
             />
         </div>
         <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-            <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+            <p className="position-absolute bg-body" style={{ top: '-10px', left: '10px' }}>
                 Ngày sinh *
             </p>
             <input
                 required
                 name="birth_day"
-                className="outline-none border-none w-100 py-2"
+                className="outline-none border-none bg-body w-100 py-2"
                 type="date"
                 placeholder="Nhập ngày sinh"
             />
         </div>
         <button
-            className="btn btn-vng-third text-white py-4"
+            className="btn btn-vng-third border-vng-third text-white py-4"
             type="submit"
             onClick={(e) => {
                 console.log('clicked')

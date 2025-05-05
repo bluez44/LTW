@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { CiLock } from 'react-icons/ci';
 import { LuEyeClosed, LuEye } from 'react-icons/lu';
@@ -9,64 +9,58 @@ import { useNavigate } from 'react-router';
 
 function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const admin = {
     username: 'admin',
     password: 'admin',
-  }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
 
-    // console.log('data', data);
-
     const res = await adminLogin(data);
-    
+
     console.log('res', res);
 
     notify(res.status, res.message);
 
-    if(res.status == 200) {
+    if (res.status == 200) {
       setTimeout(() => {
         navigate('/admin');
-      }, 2000)
+      }, 2000);
     }
-    
-  }
+  };
 
   return (
-    <form 
-      onSubmit={handleLogin}
-      className="d-flex flex-column gap-4 w-100" 
-      method="POST"
-    >
+    <form onSubmit={handleLogin} className="d-flex flex-column gap-4 w-100" method="POST">
       <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-        <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+        <p className={`bg-body position-absolute`} style={{ top: '-10px', left: '10px' }}>
           Tên đăng nhập/Email *
         </p>
         <input
           required
           name="username"
-          id='username'
-          className="outline-none border-none w-100 py-2"
+          id="username"
+          className="outline-none border-none w-100 bg-body py-2"
           type="text"
           defaultValue={admin.username}
           placeholder="Nhập tên đăng nhập hoặc email"
         />
       </div>
       <div className="position-relative py-3 px-4 border rounded-3 auth_input text-vng-text">
-        <p className="position-absolute bg-white" style={{ top: '-10px', left: '10px' }}>
+        <p className={`bg-body position-absolute`} style={{ top: '-10px', left: '10px' }}>
           Mật khẩu *
         </p>
         <div className="position-relative py-2">
           <input
             required
             name="password"
-            id='password'
-            className="outline-none border-none w-100 px-5 py-2"
+            id="password"
+            className="outline-none border-none w-100 bg-body px-5 py-2"
             type={!isShowPassword ? 'password' : 'text'}
             defaultValue={admin.password}
             placeholder="Nhập mật khẩu"
@@ -87,12 +81,7 @@ function LoginForm() {
           </button>
         </div>
       </div>
-      <button
-        className="btn btn-vng-third text-white py-4"
-        type="submit"
-        onClick={(e) => {
-        }}
-      >
+      <button className="btn btn-vng-third border border-vng-third text-white py-4" type="submit" onClick={(e) => {}}>
         Tiếp tục
       </button>
     </form>

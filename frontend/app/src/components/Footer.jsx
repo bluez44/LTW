@@ -9,7 +9,7 @@ import FooterMenu from '@/components/FooterMenu';
 function Footer() {
   return (
     <footer className="footer py-5 position-relative z-0">
-      <div className="container">
+      <div className="container px-0">
         <a href="#">
           <span className="d-block mb-3 mb-md-5" id="footer-vng" data-icon="vng">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 16.81">

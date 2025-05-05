@@ -41,7 +41,7 @@ function FooterMenu({ title, items }) {
       </div>
       <ul
         ref={ulRef}
-        className="list-unstyled ps-3 ps-md-0"
+        className="list-unstyled ps-3 ps-md-0 mb-0"
         style={{
           maxHeight: `${isMobile ? (isOpen ? `${ulRef.current.scrollHeight}px` : '0') : '1000px'}`,
           overflow: 'hidden',

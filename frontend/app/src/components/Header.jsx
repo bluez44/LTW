@@ -1,12 +1,12 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
-
 
 import { Link } from 'react-router';
 
 import { HiBars3 } from 'react-icons/hi2';
 import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
-import { MdOutlineManageAccounts } from "react-icons/md";
+import { MdOutlineManageAccounts } from 'react-icons/md';
+import { MdLightMode, MdDarkMode } from 'react-icons/md';
 
 import { logout } from '@/api';
 import notify from '@/utils/functions/Notify';
@@ -17,6 +17,9 @@ import '@/styles/Header.css';
 
 function Header() {
   const [isShowMenu, setIsShowMenu] = useState(false);
+
+  const [pageTheme, setPageTheme] = useState(localStorage.getItem('theme') || 'light');
+
   const items = [
     {
       name: 'Về VNG',
@@ -49,25 +52,25 @@ function Header() {
     const fetchUser = async () => {
       const res = await getUserInfo();
       return res;
-    }
+    };
 
-    const res = fetchUser()
+    const res = fetchUser();
     // console.log('res', res);
 
-    res.then(res => {
-      if(res.status === 200) {
+    res.then((res) => {
+      if (res.status === 200) {
         setUserInfo(res.data.user);
       } else {
         setUserInfo(null);
       }
-    })
-  }, [userInfo])
+    });
+  }, [userInfo]);
 
   window.addEventListener('click', (e) => {
     if (isShowAction) {
       setIsShowAction(false);
     }
-  })
+  });
 
   useEffect(() => {
     const pathName = window.location.pathname;
@@ -77,11 +80,11 @@ function Header() {
         setActiveIndex(index);
       }
     });
-  })
+  });
 
   return (
     <header className="shadow position-fixed top-0 left-0 w-100 z-3 bg-white">
-      <nav className="d-flex justify-content-between align-items-center container nav_bar">
+      <nav className="d-flex justify-content-between align-items-center container nav_bar px-0">
         <div
           className="d-md-none"
           onClick={(e) => {
@@ -113,7 +116,7 @@ function Header() {
         </Link>
 
         <ul
-          className={`${isShowMenu ? 'd-block' : 'd-none'} py-5 py-md-0 position-absolute top-100 start-0 position-md-static z-3 d-md-flex flex-column flex-md-row vh-100 h-md-100 bg-white w-100 w-md-auto list-unstyled fs-5 fs-md-6 fw-bold fw-md-normal justify-content-between align-items-start align-items-md-center`}
+          className={`${isShowMenu ? 'd-block' : 'd-none'} mb-0 py-5 py-md-0 position-absolute top-100 start-0 position-md-static z-3 d-md-flex flex-column flex-md-row vh-100 h-md-100 bg-white w-100 w-md-auto list-unstyled fs-5 fs-md-6 fw-bold fw-md-normal justify-content-between align-items-start align-items-md-center`}
           onClick={(e) => {
             setIsShowMenu(false);
           }}
@@ -142,67 +145,84 @@ function Header() {
             </li>
           ))}
         </ul>
+
         <div className="position-relative d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center h-100 gap-0 gap-md-3">
-          <CiSearch size={30} />
+          {pageTheme === 'light' ? (
+            <MdLightMode
+              onClick={() => {
+                setTheme('dark', true);
+                setPageTheme('dark');
+              }}
+              className="fs-4"
+              style={{cursor: 'pointer'}}
+            />
+          ) : (
+            <MdDarkMode
+              onClick={() => {
+                setTheme('light', true);
+                setPageTheme('light');
+              }}
+              className="fs-4"
+              style={{cursor: 'pointer'}}
+            />
+          )}
           {!userInfo ? (
-            <Link to={'/auth/login'} className="d-none d-md-block btn btn-vng-primary text-white p-3">
+            <Link to={'/auth/login'} className="d-none d-md-block btn btn-vng-primary text-white p-3" style={{ '--bs-btn-bg': '#e65a26' }}>
               Đăng nhập
             </Link>
           ) : (
             <>
-              <p 
-                className='header_user_info h-md-100 d-flex align-items-center'
-                style={{cursor: 'pointer'}}
-                onClick={e => {
-                  e.stopPropagation()
+              <p
+                className="header_user_info h-md-100 d-flex align-items-center"
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => {
+                  e.stopPropagation();
                   setIsShowAction(!isShowAction);
                 }}
               >
                 Xin chào {userInfo?.user_name}
               </p>
-              {
-                isShowAction && (
-                  <ul 
-                    style={{width: '200%'}} 
-                    className='header_user_action position-absolute bg-white p-3 z-3 top-100 top-md-70 end-0 d-flex flex-column list-unstyled rounded shadow'
-                    onClick={e => {
-                      e.stopPropagation()
-                    }}
-                  >
-                    <li>
-                      <Link 
-                        className='text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4'
-                        onClick={e => {
-                          e.stopPropagation()
-                        }}
-                      >
-                        <MdOutlineManageAccounts size={24}/>
-                        <span className='ms-1'>Trung tâm tài khoản</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        className='text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4'
-                        onClick={async e => {
-                          e.stopPropagation()
-                          
-                          const res = await logout();
+              {isShowAction && (
+                <ul
+                  style={{ width: '200%' }}
+                  className="header_user_action position-absolute bg-white p-3 z-3 top-100 top-md-70 end-0 d-flex flex-column list-unstyled rounded shadow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <li>
+                    <Link
+                      className="text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
+                    >
+                      <MdOutlineManageAccounts size={24} />
+                      <span className="ms-1">Trung tâm tài khoản</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4"
+                      onClick={async (e) => {
+                        e.stopPropagation();
 
-                          notify(res.status, res.message);
-                          
-                          if(res.status === 200) {
-                            localStorage.removeItem('user');
-                            setUserInfo(null);
-                          }
-                        }}
-                      >
-                        <IoLogOut size={24}/>
-                        <span className='ms-1'>Đăng xuất</span>
-                      </Link>
-                    </li>
-                  </ul>
-                )
-              }
+                        const res = await logout();
+
+                        notify(res.status, res.message);
+
+                        if (res.status === 200) {
+                          localStorage.removeItem('user');
+                          setUserInfo(null);
+                        }
+                      }}
+                    >
+                      <IoLogOut size={24} />
+                      <span className="ms-1">Đăng xuất</span>
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </>
           )}
         </div>

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export default function notify(code, message) {
+export default function notify(code = 400, message = '') {
   if (code >= 200 && code < 300) {
     toast.success(message);
   }

@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router';
 
-import logo from '@/assets/compiled/svg/logo.svg';
-import '@/assets/compiled/css/app.css';
-import '@/assets/compiled/css/app-dark.css';
-import '@/assets/compiled/css/iconly.css';
+import logo from '../../../mazer/compiled/svg/logo.svg';
+import { logout } from '@/api';
+import notify from '@/utils/functions/Notify';
 
 function Sidebar() {
   const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
+
+  const [pathname, setPathname] = useState(window.location.pathname.split('/')[2]);
+
+  const handleLogout = async () => {
+    const response = await logout();
+    if (response) {
+      window.location.href = '/';
+    } else {
+      notify(500, 'Logout failed');
+    }
+  };
 
   return (
     <div id="sidebar">
@@ -88,36 +98,44 @@ function Sidebar() {
         </div>
         <div className="sidebar-menu">
           <ul className="menu">
+            <li className="sidebar-title">Danhh sách các component</li>
+
             <li className="sidebar-title">Quản lý</li>
 
-            <li className="sidebar-item">
-              <Link to="/admin" className="sidebar-link">
-                <i className="bi bi-house"></i>
+            <li className={`sidebar-item ${pathname === 'contact' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('contact')} to={'/admin/contact'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
                 <span>Liên hệ người dùng</span>
               </Link>
             </li>
 
-            <li className="sidebar-item">
-              <Link to="/admin" className="sidebar-link">
-                <i className="bi bi-house"></i>
-                <span>Tin tức</span>
-              </Link>
-            </li>
-
-            <li className="sidebar-item">
-              <Link to="/admin" className="sidebar-link">
-                <i className="bi bi-house"></i>
+            <li className={`sidebar-item ${pathname === 'faq' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('faq')} to={'/admin/faq'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
                 <span>Hỏi đáp</span>
               </Link>
             </li>
 
-            <li className="sidebar-item">
-              <Link to="/admin" className="sidebar-link">
-                <i className="bi bi-house"></i>
+            <li className={`sidebar-item ${pathname === 'news' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('news')} to={'/admin/news'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
+                <span>Tin tức</span>
+              </Link>
+            </li>
+
+            <li className={`sidebar-item ${pathname === 'products' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('products')} to={'/admin/products'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
                 <span>Sản phẩm</span>
               </Link>
             </li>
 
+            <li className={`sidebar-item `}>
+              <div className="sidebar-link btn btn-danger text-white" onClick={handleLogout}>
+                <i className="bi bi-grid-fill text-white"></i>
+                <span>Đăng xuất</span>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
