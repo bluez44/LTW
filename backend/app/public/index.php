@@ -10,7 +10,8 @@ require_once __DIR__ . '/../controllers/AdminController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UserController.php';
 require_once __DIR__ . '/../controllers/GuestController.php';
-
+require_once __DIR__ . '/../controllers/QuestionController.php';
+require_once __DIR__ . '/../controllers/AnswerController.php';
 
 if ($path === $url . '/login' && $method === 'POST') {
     login();
@@ -26,7 +27,22 @@ if ($path === $url . '/login' && $method === 'POST') {
     adminRegister();
 } elseif ($path === $url . '/contact' && $method === 'POST') {
     sendContactForm();
-} else {
+} elseif ($path === $url . '/get-10-questions' && $method === 'GET'){
+    getQuestions();
+} elseif ($path === $url . '/count' && $method === 'GET'){
+    getNumberQuesions();
+} elseif ($path === $url . '/create-question' && $method === 'POST'){
+    createQuestion();
+} elseif ($path === $url . '/delete-question' && $method === 'GET'){
+    deleteQuestion();
+} elseif ($path === $url . '/get-answers' && $method === 'GET'){
+    getAnswersByQuestionId();
+} elseif ($path === $url . '/create-answer' && $method === 'POST'){
+    createAnswer();
+} elseif ($path === $url . '/delete-answer' && $method === 'GET'){
+    deleteAnswerById();
+} 
+else {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found ' . $path . " " . $method]);
 }

@@ -26,5 +26,14 @@ class UserModel {
         $stmt->bind_param("sssssss", $email, $user_name, $hashed, $first_name, $last_name, $phone_number, $birth_day);
         return $stmt->execute();
     }
+
+    public static function getUserFullNameByAcountId($account_id){
+        global $conn;
+        $user_sql = "SELECT first_name, last_name FROM user WHERE account_id = ?";
+        $user_stmt = $conn->prepare($user_sql);
+        $user_stmt->bind_param("i", $account_id);
+        $user_stmt->execute();
+        return $user_stmt->get_result();
+    }
 }
 ?>
