@@ -27,5 +27,29 @@ class contactFormModel {
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
+
+    public static function deleteContactForm($id)
+    {
+        global $conn;
+        $stmt = $conn->prepare("DELETE FROM contact_form WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
+    
+    public static function updateContactForm($id, $status)
+    {
+        global $conn;
+        $stmt = $conn->prepare("UPDATE contact_form SET status = ?, processed_at = NOW() WHERE id = ?");
+        $stmt->bind_param("si", $status, $id);
+        return $stmt->execute();
+    }
+
+    public static function deleteContactFormById($id)
+    {
+        global $conn;
+        $stmt = $conn->prepare("DELETE FROM contact_form WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
 }
 ?>

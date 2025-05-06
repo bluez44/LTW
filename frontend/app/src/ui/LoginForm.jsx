@@ -29,7 +29,7 @@ function LoginForm() {
 
     const res = await login(data);
 
-    console.log('res', res);
+    // console.log('res', res);
 
     notify(res.status, res.message);
 

@@ -21,7 +21,7 @@ function ContactUs() {
       } else {
         setUserInfo(null);
       }
-    });
+    })
   }, []);
 
   const handleSubmit = async (e) => {

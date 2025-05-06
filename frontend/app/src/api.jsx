@@ -104,3 +104,25 @@ export const getAllContactForms = async () => {
     return error;
   }
 }
+
+export const updateContactFormStatus = async (id, status) => {
+  // console.log(id, status);
+
+  try {
+    const response = await instance.post(`${API_URL}/admin/contact/${id}`, { status });
+    return response.data;
+  } catch (error) {
+    console.error("Update contact form status error:", error);
+    return error;
+  }
+}
+
+export const deleteContactForm = async (id) => {
+  try {
+    const response = await instance.delete(`${API_URL}/admin/contact/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Delete contact form error:", error);
+    return error;
+  }
+}

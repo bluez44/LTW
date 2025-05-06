@@ -30,6 +30,24 @@ if ($path === $url . '/login' && $method === 'POST') {
     adminProfile();
 } elseif ($path === $url . '/admin/contact' && $method === 'GET') {
     getAllContacts();
+} elseif ($method === 'POST' && preg_match('#^' . preg_quote($url, '#') . '/admin/contact/(\d+)$#', $path, $matches)) {
+    $id = (int)$matches[1];
+
+    if ($id > 0) {
+        updateContactStatus($id);
+    } else {
+        http_response_code(400);
+        echo json_encode(['message' => 'Invalid ID']);
+    }
+} elseif ($method === 'DELETE' && preg_match('#^' . preg_quote($url, '#') . '/admin/contact/(\d+)$#', $path, $matches)) {
+    $id = (int)$matches[1];
+
+    if ($id > 0) {
+        deleteContact($id);
+    } else {
+        http_response_code(400);
+        echo json_encode(['message' => 'Invalid ID']);
+    }
 } elseif ($path === $url . '/contact' && $method === 'POST') {
     sendContactForm();
 } elseif ($path === $url . '/get-10-questions' && $method === 'GET'){
@@ -46,8 +64,7 @@ if ($path === $url . '/login' && $method === 'POST') {
     createAnswer();
 } elseif ($path === $url . '/delete-answer' && $method === 'GET'){
     deleteAnswerById();
-}
-else {
+} else {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found ' . $path . " " . $method]);
 }
