@@ -22,6 +22,8 @@ if ($path === $url . '/login' && $method === 'POST') {
     logout();
 } elseif ($path === $url . '/profile' && $method === 'GET') {
     profile();
+} elseif ($path === $url . '/profile' && $method === 'POST') {
+    updateProfile();
 } elseif ($path === $url . '/admin/login' && $method === 'POST') {
     adminLogin();
 } elseif ($path === $url . '/admin/register' && $method === 'POST') {

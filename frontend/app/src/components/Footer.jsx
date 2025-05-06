@@ -8,7 +8,7 @@ import FooterMenu from '@/components/FooterMenu';
 
 function Footer() {
   return (
-    <footer className="footer py-5 position-relative z-0">
+    <footer className="footer py-5 position-relative z-0 bg-body">
       <div className="container px-0">
         <a href="#">
           <span className="d-block mb-3 mb-md-5" id="footer-vng" data-icon="vng">
@@ -127,7 +127,7 @@ function Footer() {
             </a>
             <a
               href="#"
-              className="d-flex align-items-center gap-2 text-decoration-none phone py-2 px-3 rounded-pill border bg-white"
+              className="d-flex align-items-center gap-2 text-decoration-none phone py-2 px-3 rounded-pill border bg-body"
             >
               <FaPhoneAlt size={24} className="text-vng-primary" />
               <span className="text-vng-text">(8428) - 3962 3888</span>

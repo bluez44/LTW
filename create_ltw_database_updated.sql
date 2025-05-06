@@ -16,6 +16,7 @@ CREATE TABLE User (
     birth_day DATE,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
+    avatar_url VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (account_id) REFERENCES Account(id)
 );
 

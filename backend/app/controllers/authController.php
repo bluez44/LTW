@@ -90,20 +90,44 @@ function adminLogin()
 
 function register()
 {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $email = $data['email'] ?? '';
-    $user_name = $data['user_name'] ?? '';
-    $password = $data['password'] ?? '';
-    $first_name = $data['first_name'] ?? '';
-    $last_name = $data['last_name'] ?? '';
-    $phone_number = $data['phone_number'] ?? '';
-    $birth_day = $data['birth_day'] ?? '';
+    $targetDir = __DIR__ . '/../uploads/';
+    if (!is_dir($targetDir)) {
+        mkdir($targetDir, 0777, true);
+    }
+    $email = $_POST['email'] ?? '';
+    $user_name = $_POST['user_name'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $first_name = $_POST['first_name'] ?? '';
+    $last_name = $_POST['last_name'] ?? '';
+    $phone_number = $_POST['phone_number'] ?? '';
+    $birth_day = $_POST['birth_day'] ?? '';
+
+    // Xử lý upload file
+    $file = $_FILES['avatar'] ?? '';
+    $uploadDir = '/LTW_ASS/backend/app/uploads/';
+    $filename = uniqid() . "_" . basename($file["name"]);
+    $targetFile = $targetDir . $filename;
+    $avatarUrl = $uploadDir . $filename;
+
+    $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+
     if (UserModel::findUserByUserName($email)) {
         response_json([
             'message' => 'Mail đã được sử dụng! Vui lòng sử dụng email khác'
         ], 409);
     } else {
-        if (UserModel::createUser($email, $user_name, $password, $first_name, $last_name, $phone_number, $birth_day)) {
+        if (!in_array($fileType, $allowedTypes)) {
+            response_json(['message' => 'Định dạng ảnh không phù hợp'], 500);
+            return;
+        }
+
+        
+        if (UserModel::createUser($email, $user_name, $password, $first_name, $last_name, $phone_number, $birth_day, $avatarUrl)) {
+            if (!move_uploaded_file($file["tmp_name"], $targetFile)) {
+                response_json(['message' => 'Lỗi upload file'], 500);
+                return;
+            }
             response_json(['message' => 'Đăng ký thành công'], 201);
         } else {
             response_json(['message' => 'Đăng ký thất bại'], 500);

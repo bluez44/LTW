@@ -3,9 +3,13 @@
 }
 
 .nav_bar > ul a:hover {
-  background-color: var(--vng-primary);
+  background-color: var(--vng-primary) !important;
   color: #fff !important;
   transition: all 0.3s;
+}
+
+.nav_bar .active {
+  color: var(--vng-primary) !important;
 }
 
 .nav_bar .active::after {

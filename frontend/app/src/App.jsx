@@ -10,6 +10,7 @@ import AboutUs from '@/pages/AboutUs';
 import FAQ from '@/pages/FAQ';
 import Product from '@/pages/Product';
 import ContactUs from '@/pages/ContactUs';
+import Profile from '@/pages/Profile';
 import Register from '@/pages/auth/Register';
 import AdminLogin from '@/pages/auth/AdminLogin';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/products/*" element={<Product />} /> {/* Sử dụng wildcard để hỗ trợ sub-route */}
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path='/profile' element={<Profile />} />
       </Route>
 
       <Route element={<AdminLayout />}>
