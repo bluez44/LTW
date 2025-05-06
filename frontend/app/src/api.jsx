@@ -36,16 +36,12 @@ export const adminLogin = async ({ username, password }) => {
   }
 };
 
-export const register = async ({ email, user_name, password, first_name, last_name, phone_number, birth_day }) => {
+export const register = async (formData) => {
   try {
-    const response = await instance.post(`${API_URL}/register`, {
-      email,
-      user_name,
-      password,
-      first_name,
-      last_name,
-      phone_number,
-      birth_day,
+    const response = await instance.post(`${API_URL}/register`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
     return response.data;
   } catch (error) {
@@ -103,7 +99,7 @@ export const getAllContactForms = async () => {
     // console.error("Get all contact forms error:", error);
     return error;
   }
-}
+};
 
 export const updateContactFormStatus = async (id, status) => {
   // console.log(id, status);
@@ -112,17 +108,31 @@ export const updateContactFormStatus = async (id, status) => {
     const response = await instance.post(`${API_URL}/admin/contact/${id}`, { status });
     return response.data;
   } catch (error) {
-    console.error("Update contact form status error:", error);
+    console.error('Update contact form status error:', error);
     return error;
   }
-}
+};
 
 export const deleteContactForm = async (id) => {
   try {
     const response = await instance.delete(`${API_URL}/admin/contact/${id}`);
     return response.data;
   } catch (error) {
-    console.error("Delete contact form error:", error);
+    console.error('Delete contact form error:', error);
     return error;
   }
-}
+};
+
+export const updateProfile = async (formData) => {
+  try {
+    const response = await instance.post(`${API_URL}/profile`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // console.error("Update profile error:", error);
+    return error;
+  }
+};

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import React, { use, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 
 import { Link } from 'react-router';
@@ -64,7 +64,7 @@ function Header() {
         setUserInfo(null);
       }
     });
-  }, [userInfo]);
+  }, []);
 
   window.addEventListener('click', (e) => {
     if (isShowAction) {
@@ -83,7 +83,7 @@ function Header() {
   });
 
   return (
-    <header className="shadow position-fixed top-0 left-0 w-100 z-3 bg-white">
+    <header className="shadow position-fixed top-0 left-0 w-100 z-3 bg-body">
       <nav className="d-flex justify-content-between align-items-center container nav_bar px-0">
         <div
           className="d-md-none"
@@ -132,7 +132,7 @@ function Header() {
           {items.map((item, index) => (
             <li key={index}>
               <Link
-                className={`${!isShowMenu && activeIndex == index ? 'active' : ''} position-relative lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none`}
+                className={`${!isShowMenu && activeIndex == index ? 'active' : ''} position-relative lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none bg-body`}
                 style={{ height: '81px' }}
                 to={item.link}
                 onClick={(e) => {
@@ -154,7 +154,7 @@ function Header() {
                 setPageTheme('dark');
               }}
               className="fs-4"
-              style={{cursor: 'pointer'}}
+              style={{ cursor: 'pointer' }}
             />
           ) : (
             <MdDarkMode
@@ -163,15 +163,33 @@ function Header() {
                 setPageTheme('light');
               }}
               className="fs-4"
-              style={{cursor: 'pointer'}}
+              style={{ cursor: 'pointer' }}
             />
           )}
           {!userInfo ? (
-            <Link to={'/auth/login'} className="d-none d-md-block btn btn-vng-primary text-white p-3" style={{ '--bs-btn-bg': '#e65a26' }}>
+            <Link
+              to={'/auth/login'}
+              className="d-none d-md-block btn btn-vng-primary text-white p-3"
+              style={{ '--bs-btn-bg': '#e65a26' }}
+            >
               Đăng nhập
             </Link>
           ) : (
             <>
+              {userInfo?.avatar_url && (
+                <img
+                  src={`http://localhost:85/${userInfo?.avatar_url}`}
+                  style={{ cursor: 'pointer' }}
+                  alt="avatar"
+                  width={30}
+                  height={30}
+                  className="rounded-circle"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsShowAction(!isShowAction);
+                  }}
+                />
+              )}
               <p
                 className="header_user_info h-md-100 d-flex align-items-center"
                 style={{ cursor: 'pointer' }}
@@ -184,18 +202,31 @@ function Header() {
               </p>
               {isShowAction && (
                 <ul
-                  style={{ width: '200%' }}
+                  style={{ width: '200%', maxWidth: 350 }}
                   className="header_user_action position-absolute bg-white p-3 z-3 top-100 top-md-70 end-0 d-flex flex-column list-unstyled rounded shadow"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
                 >
+                  {userInfo?.avatar_url && (
+                    <li className="text-center mb-4">
+                      <img
+                        src={`http://localhost:85/${userInfo?.avatar_url}`}
+                        alt="avatar"
+                        width={60}
+                        height={60}
+                        className="rounded-circle"
+                      />
+                    </li>
+                  )}
                   <li>
                     <Link
                       className="text-decoration-none text-vng-text-user p-3 w-100 d-inline-block rounded-4"
                       onClick={(e) => {
                         e.stopPropagation();
+                        setIsShowAction(false);
                       }}
+                      to={'/profile'}
                     >
                       <MdOutlineManageAccounts size={24} />
                       <span className="ms-1">Trung tâm tài khoản</span>
