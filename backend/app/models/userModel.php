@@ -19,6 +19,14 @@ class UserModel {
         return $stmt->get_result()->fetch_assoc();
     }
 
+    public static function getPasswordById($id) {
+        global $conn;
+        $stmt = $conn->prepare("SELECT password FROM user WHERE id = ? LIMIT 1");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()["password"];
+    }
+
     public static function createUser($email, $user_name, $password, $first_name, $last_name, $phone_number, $birth_day, $avatar_url) {
         global $conn;
         $hashed = password_hash($password, PASSWORD_BCRYPT);
@@ -35,6 +43,25 @@ class UserModel {
         return $stmt->execute();
     }
 
+    public static function checkPassword($id, $password) {
+        global $conn;
+        $pass = self::getPasswordById($id);
+
+        if (!password_verify($password, $pass)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function changePassword($id, $password) {
+        global $conn;
+        $hashed = password_hash($password, PASSWORD_BCRYPT);
+        $stmt = $conn->prepare("UPDATE user SET password = ? WHERE id = ?");
+        $stmt->bind_param("si", $hashed, $id);
+        return $stmt->execute();
+    }
+
     public static function getUserFullNameByUserId($user_id){
         global $conn;
         $user_sql = "SELECT first_name, last_name FROM user WHERE id = ?";
@@ -43,5 +70,7 @@ class UserModel {
         $user_stmt->execute();
         return $user_stmt->get_result();
     }
+
+    
 }
 ?>

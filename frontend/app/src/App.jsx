@@ -11,6 +11,7 @@ import FAQ from '@/pages/FAQ';
 import Product from '@/pages/Product';
 import ContactUs from '@/pages/ContactUs';
 import Profile from '@/pages/Profile';
+import ResetPassword from '@/pages/ResetPassword';
 import Register from '@/pages/auth/Register';
 import AdminLogin from '@/pages/auth/AdminLogin';
 import AdminLayout from '@/components/admin/AdminLayout';
@@ -19,7 +20,7 @@ import Contact from '@/pages/Admin/Contact';
 import FAQs from '@/pages/Admin/FAQs';
 import News from '@/pages/Admin/News';
 import Products from '@/pages/Admin/Products';
-import AboutUsAdmin from './pages/Admin/AboutUsAdmin';
+import AboutUsAdmin from '@/pages/Admin/AboutUsAdmin';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/reset' element={<ResetPassword />} />
       </Route>
 
       <Route element={<AdminLayout />}>

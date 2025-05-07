@@ -24,6 +24,8 @@ if ($path === $url . '/login' && $method === 'POST') {
     profile();
 } elseif ($path === $url . '/profile' && $method === 'POST') {
     updateProfile();
+} elseif ($path === $url . '/profile/reset' && $method === 'POST') {
+    changePassword();
 } elseif ($path === $url . '/admin/login' && $method === 'POST') {
     adminLogin();
 } elseif ($path === $url . '/admin/register' && $method === 'POST') {
