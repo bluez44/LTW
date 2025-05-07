@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:85/LTW_ASS/backend/app/public'; // Replace with your actual API URL
+export const API_URL = 'http://localhost:85/LTW_ASS/backend/app/public'; // Replace with your actual API URL
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const instance = axios.create({
 });
 
 export const login = async ({ username, password }) => {
-  // console.log(username, password);
+  console.log(username, password);
 
   try {
     const response = await instance.post(`${API_URL}/login`, { username, password });

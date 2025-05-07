@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/database.php';
 
 class QuestionModel{
-    public static function get10Question($offset, $limit, $search){
+    public static function get10Questions($offset, $limit, $search){
         global $conn;
 
 
@@ -13,6 +13,17 @@ class QuestionModel{
         $stmt = $conn->prepare($sql);
         $likeSearch = "%$search%";
         $stmt->bind_param("sii", $likeSearch, $offset, $limit);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public static function getAllQuestions(){
+        global $conn;
+
+
+        $sql = "SELECT * FROM question 
+            ORDER BY create_at DESC";
+        $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
     }
@@ -52,10 +63,10 @@ class QuestionModel{
         return $stmt->get_result();
     }
 
-    public static function createQuestion($account_id, $title, $content, $create_at, $update_at){
+    public static function createQuestion($user_id, $title, $content, $create_at, $update_at){
         global $conn;
 
-        $sql = "INSERT INTO question (account_id, title, content, create_at, update_at) 
+        $sql = "INSERT INTO question (user_id, title, content, create_at, update_at) 
             VALUES (?, ?, ?, ?, ?)";
     
         $stmt = $conn->prepare($sql);
@@ -66,13 +77,44 @@ class QuestionModel{
             ]);
         }
 
-        $stmt->bind_param("issss", $account_id, $title, $content, $create_at, $update_at);
+        $stmt->bind_param("issss", $user_id, $title, $content, $create_at, $update_at);
 
         if ($stmt->execute()) {
             $stmt->close();
             return json_encode([
                 "status" => "success",
                 "message" => "Question created successfully"
+            ]);
+        } else {
+            $error = $stmt->error;
+            $stmt->close();
+            return json_encode([
+                "status" => "error",
+                "message" => "Execute failed: " . $error
+            ]);
+        }
+    }
+
+    public static function updateQuestion($question_id, $title, $content, $update_at){
+        global $conn;
+
+        $sql = "UPDATE question SET title = ?, content = ?, update_at = ? WHERE question_id = ?";
+    
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            return json_encode([
+                "status" => "error",
+                "message" => "Prepare failed: " . $conn->error
+            ]);
+        }
+
+        $stmt->bind_param("sssi", $title, $content, $update_at, $question_id);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            return json_encode([
+                "status" => "success",
+                "message" => "Question updated successfully"
             ]);
         } else {
             $error = $stmt->error;

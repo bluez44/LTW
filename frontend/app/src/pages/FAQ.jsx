@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import "../styles/FAQ-icon.css"
 import "../styles/FAQ.css"
 import userImage from "../assets/user.jpg"
-import axios from "axios"
+import { getUserInfo } from "@/api"
+import notify from '@/utils/functions/Notify';
+import { API_URL, instance } from "@/api"
 
 const FAQ = () => {
     const [filterState, setFilterState] = useState("all")
@@ -12,25 +14,71 @@ const FAQ = () => {
     const [openedAnswers, setOpenedAnswers] = useState([]);
     const [listAnswers, setListAnswers] = useState({})
     const [listTextAreaAnswers, setListTextAreaAnswers] = useState({}) 
-    const [isCreateQuestion, setIsCreateQuestion] = useState(false)
+    const [isCreateQuestion, setIsCreateQuestion] = useState(null)
     const [titleInputQuestion, setTitleInputQuestion] = useState("")
     const [contentInputQuestion, setContentInputQuestion] = useState("")
+    const [isUpdateAnswer, setIsUpdateAnswer] = useState(0)
+    const [userInfo, setUserInfo] = useState(null);
+
     const targetSection = useRef(null)
     const createQuestionTarget = useRef(null)
+    
+    useLayoutEffect(() => {
+        const fetchUser = async () => {
+            const res = await getUserInfo();
+            return res;
+        };
+
+        const res = fetchUser();
+        // console.log('res', res);
+
+        res.then((res) => {
+            if (res.status === 200) {
+            setUserInfo(res.data.user);
+            } else {
+            setUserInfo(null);
+            }
+        });
+    }, [userInfo]);
 
     const scrollDown = () => {
         if(targetSection.current) targetSection.current.scrollIntoView({behavior: "smooth"})
     }
 
     const handleOpenFormCreate = () => {
-        setIsCreateQuestion(true)
+        setIsCreateQuestion("create")
         setTimeout(() => scrollDownCreateQuestionForm(), 100);
+    }
+
+    const handleUpdateFAQ = async (question_id, title, content) => {
+        setTimeout(() => scrollDownCreateQuestionForm(), 100);
+        setTitleInputQuestion(title)
+        setContentInputQuestion(content)
+        setIsCreateQuestion(question_id)
+    }
+
+    const handleUpdateAnswer = async (text, question_id, answer_id) => {
+        handleTypeAnswer(text, question_id)
+        setIsUpdateAnswer(answer_id)
+    }
+
+    const handleCancelUpdateAnswer = (question_id) => {
+        handleTypeAnswer("", question_id)
+        setIsUpdateAnswer(0)
     }
 
     const scrollDownCreateQuestionForm = () => {
         if (createQuestionTarget.current) {
             createQuestionTarget.current.scrollIntoView({ behavior: "smooth" });
         }
+    }
+
+    const handleCancelCreateFAQ = () => {
+        if(isCreateQuestion !== "create"){
+            setContentInputQuestion("")
+            setTitleInputQuestion("")
+        }
+        setIsCreateQuestion(null)
     }
 
     const removeVietnameseTones = (str) => {
@@ -53,34 +101,56 @@ const FAQ = () => {
         }
     }
 
-    const handleCreateQuestion =  async () => {
-        if(contentInputQuestion === "" || titleInputQuestion === ""){
-            alert("Nhập đầy đủ tiêu đề và nội dung câu hỏi trước khi gửi")
-            return
-        }
-        try {
-            const response = await axios.post("http://localhost:85/LTW_ASS/backend/app/public/create-question", {
-                account_id: 1,
-                title: titleInputQuestion,
-                content: contentInputQuestion,
-            })
-            if(response.data.status === 'success'){
-                setSearch("")
-                fetchInitFAQs("all", "")
-                setFilterState("all")
-                setContentInputQuestion("")
-                setTitleInputQuestion("")
-                fetchTotalQuestion("all", "")
+    const handleCreateOrUpdateQuestion =  async () => {
+        if(userInfo === null){
+            notify(400,"Vui lòng đăng nhập để đặt câu hỏi!")
+        }else{
+            if(contentInputQuestion === "" || titleInputQuestion === ""){
+                alert("Nhập đầy đủ tiêu đề và nội dung câu hỏi trước khi gửi")
+                return
+            }
+            try {
+                if(isCreateQuestion === "create"){
+                    const response = await instance.post(`${API_URL}/create-question`, {
+                        user_id: userInfo.id,
+                        title: titleInputQuestion,
+                        content: contentInputQuestion,
+                    })
+                    console.log(response)
+                    if(response.data.status === 'success'){
+                        setSearch("")
+                        fetchInitFAQs("all", "")
+                        setFilterState("all")
+                        setContentInputQuestion("")
+                        setTitleInputQuestion("")
+                        fetchTotalQuestion("all", "")
+                        setIsCreateQuestion(null)
+                        notify(200,"Tạo câu hỏi thành công!")
+                    }
+                } else{
+                    const response = await instance.post(`${API_URL}/update-question`, {
+                        question_id: isCreateQuestion,
+                        title: titleInputQuestion,
+                        content: contentInputQuestion,
+                    })
+                    if(response.data.status === 'success'){
+                        fetchInitFAQs(filterState, search)
+                        fetchTotalQuestion(filterState, search)
+                        setContentInputQuestion("")
+                        setTitleInputQuestion("")
+                        setIsCreateQuestion(null)
+                        notify(200,"Chỉnh sửa câu hỏi thành công!")
+                    }
+                }
+            } catch (error) {
                 setIsCreateQuestion(false)
             }
-        } catch (error) {
-            setIsCreateQuestion(false)
         }
     }
 
     const fetchAnswersOfQuestion = async (question_id) =>{
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-answers?question_id=${question_id}`)
+            const response = await instance.get(`${API_URL}/get-answers?question_id=${question_id}`)
             setListAnswers(prevList => ({
                 ...prevList,
                 [question_id]: response.data
@@ -105,33 +175,52 @@ const FAQ = () => {
         if(!confirm) return
 
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/delete-answer?answer_id=${answer_id}`)
+            const response = await instance.get(`${API_URL}/delete-answer?answer_id=${answer_id}`)
 
             if(response.data.status === 'success'){
                 fetchAnswersOfQuestion(question_id)
+                notify(200,"Xóa câu trả lời thành công!")
             }
         } catch (error) {
             
         }
     }
 
-    const handleAnswer = async (question_id) => {
-        if (listTextAreaAnswers[question_id] === undefined){
-            alert("Vui lòng nhập câu trả lời trước khi gửi")
-            return
-        }
-        try {
-            const response = await axios.post(`http://localhost:85/LTW_ASS/backend/app/public/create-answer`, {
-                account_id: 1,
-                question_id,
-                content: listTextAreaAnswers[question_id]
-            })
-            if (response.data.status === "success"){
-                
-                handleTypeAnswer("",question_id)
-                fetchAnswersOfQuestion(question_id)
+    const handleCreateOrUpdateAnswer = async (question_id) => {
+        if(userInfo === null){
+            notify(400,"Vui lòng đăng nhập để trả lời")
+        }else{
+            if (listTextAreaAnswers[question_id] === undefined){
+                alert("Vui lòng nhập câu trả lời trước khi gửi")
+                return
             }
-        } catch (error) {
+            try {
+                if(isUpdateAnswer !== 0){
+                    const response = await instance.post(`${API_URL}/update-answer`, {
+                        answer_id: isUpdateAnswer,
+                        content: listTextAreaAnswers[question_id]
+                    })
+                    if (response.data.status === "success"){
+                        handleTypeAnswer("",question_id)
+                        setIsUpdateAnswer(0)
+                        fetchAnswersOfQuestion(question_id)
+                        notify(200,"Chỉnh sửa câu hỏi thành công!")
+                    }
+                }else{
+                    const response = await instance.post(`${API_URL}/create-answer`, {
+                        user_id: userInfo.id,
+                        question_id,
+                        content: listTextAreaAnswers[question_id]
+                    })
+                    if (response.data.status === "success"){
+                        handleTypeAnswer("",question_id)
+                        fetchAnswersOfQuestion(question_id)
+                        notify(200,"Tạo câu hỏi thành công!")
+                    }
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 
@@ -167,7 +256,7 @@ const FAQ = () => {
 
     const fetchMoreFAQs = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-10-questions?offset=${faqs.length}&limit=${faqs.length + 10}&filter=${filter}&search=${searchText}`)
+            const response = await instance.get(`${API_URL}/get-10-questions?offset=${faqs.length}&limit=${faqs.length + 10}&filter=${filter}&search=${searchText}`)
             setFaqs(prevFAQs => [...prevFAQs, ...response.data])
         } catch (error) {
             console.error("Fetch error:", error);
@@ -177,7 +266,7 @@ const FAQ = () => {
 
     const fetchInitFAQs = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/get-10-questions?offset=0&limit=10&filter=${filter}&search=${searchText}`)
+            const response = await instance.get(`${API_URL}/get-10-questions?offset=0&limit=10&filter=${filter}&search=${searchText}`)
             setFaqs(response.data)
         } catch (error) {
             console.error("Fetch error:", error);
@@ -187,7 +276,7 @@ const FAQ = () => {
 
     const fetchTotalQuestion = async (filter, searchText) => {
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/count?filter=${filter}&search=${searchText}`)
+            const response = await instance.get(`${API_URL}/count?filter=${filter}&search=${searchText}`)
             setTotalQuestion(response.data) 
         } catch (error) {
             console.error("Fetch error:", error);
@@ -201,7 +290,7 @@ const FAQ = () => {
         if (!confirm) return
 
         try {
-            const response = await axios.get(`http://localhost:85/LTW_ASS/backend/app/public/delete-question?question_id=${question_id}`)
+            const response = await instance.get(`${API_URL}/delete-question?question_id=${question_id}`)
             if(response.data.status === 'success'){
                 if(faqs.length < 10) {
                     fetchInitFAQs(filterState, search)
@@ -210,6 +299,7 @@ const FAQ = () => {
                 }
                 setOpenedAnswers(openedAnswers.filter(openedAnswer => openedAnswer !== index))
                 fetchTotalQuestion(filterState, search)
+                notify(200,"Xóa câu hỏi thành công!")
             }
         } catch (error) {
             console.log(error)
@@ -245,9 +335,9 @@ const FAQ = () => {
                         </div>
                     </div>
                 </div>
-                {/* <a className="scroll-down" onClick={scrollDown}>
+                <a className="scroll-down" onClick={scrollDown}>
                     <span className="svg" data-icon="arrow-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle cx="20" cy="20" r="20" fill="#4d4d4d"></circle><path d="M20 24.5a.5.5 0 0 1-.5-.5V12a.5.5 0 0 1 1 0v12a.5.5 0 0 1-.5.5Z" className="cls-2"></path><path d="M20 28.5a.52.52 0 0 1-.38-.17l-3.5-4a.5.5 0 1 1 .76-.66L20 27.24l3.12-3.57a.5.5 0 0 1 .76.66l-3.5 4a.52.52 0 0 1-.38.17Z" className="cls-2"></path></g></g></svg></span>
-                </a> */}
+                </a>
             </section>
             <section className="faq" ref={targetSection}>
                 <div className="option-bar">
@@ -280,11 +370,13 @@ const FAQ = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="answer-option">
-                                    <a>Chỉnh sửa</a>
-                                    <p>|</p>
-                                    <a onClick={() => handleDeleteQuestion(faq.question_id, index)}>Xóa</a>
-                                </div>
+                                { faq.user_id === userInfo?.id && (
+                                    <div className="answer-option">
+                                        <a onClick={() => handleUpdateFAQ(faq.question_id, faq.title, faq.content)}>Chỉnh sửa</a>
+                                        <p>|</p>
+                                        <a onClick={() => handleDeleteQuestion(faq.question_id, index)}>Xóa</a>
+                                    </div>
+                                )}
                             </div>
                             <div className="faq-content">
                                 <p className="question-tittle" style={{fontWeight: "bold"}}>{faq.title}</p>
@@ -305,8 +397,8 @@ const FAQ = () => {
                                                                 <p className="time-answer"style={{color: "gray", fontStyle: "italic", marginBlockStart: "5px"}}>{timeAgo(new Date(answer.create_at))}</p>
                                                             </div>
                                                         </div>
-                                                        {answer.account_id === 1 && (<div className="answer-option">
-                                                            <a>Chỉnh sửa</a>
+                                                        {answer.user_id === userInfo?.id && (<div className="answer-option">
+                                                            <a onClick={() => handleUpdateAnswer(answer.content, answer.question_id, answer.answer_id)}>Chỉnh sửa</a>
                                                             <p>|</p>
                                                             <a onClick={() => handleDeleteAnswer(answer.answer_id, answer.question_id)}>Xóa</a>
                                                         </div>)}
@@ -321,7 +413,12 @@ const FAQ = () => {
                                             placeholder="Viết câu trả lời của bạn..." 
                                             onChange={(e) => handleTypeAnswer(e.target.value, faq.question_id)}     
                                             value={listTextAreaAnswers[faq.question_id] || ""}/>
-                                            <button className="submit-button" onClick={() => handleAnswer(faq.question_id)}>Gửi</button>
+                                            <div>
+                                                {isUpdateAnswer !== 0 && (
+                                                    <button className="cancel-btn" style={{marginRight: '10px'}} onClick={() => handleCancelUpdateAnswer(faq.question_id)}>Hủy chỉnh sửa</button>
+                                                )}
+                                                <button className="submit-button" onClick={() => handleCreateOrUpdateAnswer(faq.question_id)}>Gửi</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style={{borderBlockStart: "1px solid rgba(0, 0, 0, 0.2)", marginBottom: "10px", marginTop: "5px"}}></div>
@@ -363,8 +460,8 @@ const FAQ = () => {
                             </div>
                 
                             <div className="create-question-option">
-                                <button className="cancel-btn" onClick={() => setIsCreateQuestion(false)}>Hủy</button>
-                                <button className="submit-button" onClick={() => handleCreateQuestion()}>Gửi</button>
+                                <button className="cancel-btn" onClick={() => handleCancelCreateFAQ()}>Hủy</button>
+                                <button className="submit-button" onClick={() => handleCreateOrUpdateQuestion()}>Gửi</button>
                             </div>
                         </div>
                     </div>

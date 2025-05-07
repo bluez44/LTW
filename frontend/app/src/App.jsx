@@ -15,9 +15,10 @@ import AdminLogin from '@/pages/auth/AdminLogin';
 import AdminLayout from '@/components/admin/AdminLayout';
 import Home from '@/pages/Admin/Home';
 import Contact from '@/pages/Admin/Contact';
-import AdminFAQ from '@/pages/Admin/AdminFAQ';
+import FAQs from '@/pages/Admin/FAQs';
 import News from '@/pages/Admin/News';
 import Products from '@/pages/Admin/Products';
+import AboutUsAdmin from './pages/Admin/AboutUsAdmin';
 
 function App() {
   return (
@@ -33,9 +34,10 @@ function App() {
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<Home />} />
         <Route path="/admin/contact" element={<Contact />} />
-        <Route path="/admin/faq" element={<AdminFAQ />} />
+        <Route path="/admin/faq" element={<FAQs />} />
         <Route path="/admin/news" element={<News />} />
         <Route path="/admin/products" element={<Products />} />
+        <Route path="/admin/about-us" element={<AboutUsAdmin />} />
       </Route>
 
       <Route path="/auth/login" element={<Login />} />

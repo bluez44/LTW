@@ -35,8 +35,8 @@ CREATE TABLE Question (
     content TEXT,
     create_at DATETIME,
     update_at DATETIME,
-    account_id INT,
-    FOREIGN KEY (account_id) REFERENCES Account(id)
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
 CREATE TABLE Answer (
@@ -45,7 +45,10 @@ CREATE TABLE Answer (
     create_at DATETIME,
     update_at DATETIME,
     question_id INT,
-    FOREIGN KEY (question_id) REFERENCES Question(question_id)
+    user_id INT,
+    FOREIGN KEY (question_id) REFERENCES Question(question_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+
 );
 
 CREATE TABLE Contact_form (
