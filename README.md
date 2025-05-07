@@ -60,7 +60,7 @@ npm run dev
 
 8. Open the **XAMPP** control panel  
 9. Start **Apache** and **MySQL**  
-10. Visit the application in your browser at: `http://localhost/LTW_ASS/backend`
+10. Visit the application in your browser at: `http://localhost:3000`
 
 ✅ **Done!**
 
