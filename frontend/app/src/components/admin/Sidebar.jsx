@@ -98,9 +98,9 @@ function Sidebar() {
         </div>
         <div className="sidebar-menu">
           <ul className="menu">
-            <li className="sidebar-title">Danhh sách các component</li>
+            <li className="sidebar-title">Danh sách các trang quản lý</li>
 
-            <li className="sidebar-title">Quản lý</li>
+            {/* <li className="sidebar-title">Quản lý</li> */}
 
             <li className={`sidebar-item ${pathname === 'contact' ? 'active' : ''}`}>
               <Link onClick={(e) => setPathname('contact')} to={'/admin/contact'} className="sidebar-link">
@@ -129,6 +129,13 @@ function Sidebar() {
                 <span>Sản phẩm</span>
               </Link>
             </li>
+
+            {/* <li className={`sidebar-item ${pathname === 'products' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('about-us')} to={'/admin/about-us'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
+                <span>Về chúng tôi</span>
+              </Link>
+            </li> */}
 
             <li className={`sidebar-item `}>
               <div className="sidebar-link btn btn-danger text-white" onClick={handleLogout}>

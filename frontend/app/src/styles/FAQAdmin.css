@@ -1,0 +1,74 @@
+.container-popup-background{
+    width: 100vw;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.container-popup{
+    width: 80%;
+    background-color: white;
+    padding: 10px;
+}
+
+.title-question, .content-question{
+    flex-direction: column;
+    gap: 0 !important;
+}
+
+.line{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid gray
+}
+
+.container-popup > div{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.container-popup > div > div{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-popup > div > div > p, .container-popup > div> p, h6{
+    font-style: italic;
+}
+
+.container-popup > div > div > p:first-child{
+    font-weight: bold;
+}
+
+.container-popup > div:first-child{
+    justify-content: end;
+    margin-top: 0px;
+}
+
+.container-popup > div:last-child{
+    flex-direction: column;
+    margin-top: 0px;
+    gap: 0px;
+}
+
+
+.container-popup > div > button{
+    background-color: white;
+    border: none;
+}
+
+.container-popup > div > button:hover{
+    scale: 110%
+}
+
+.round{
+    width: 50%;
+}

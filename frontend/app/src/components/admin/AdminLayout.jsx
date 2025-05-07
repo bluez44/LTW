@@ -16,15 +16,17 @@ function AdminLayout() {
 
     const res = fetchUser();
 
-    res.then((res) => {
-      console.log('res', res);
+    setIsValid(true)
 
-      if (res.status !== 200) {
-        window.location.href = '/auth/admin/login';
-      } else {
-        setIsValid(true);
-      }
-    });
+    // res.then((res) => {
+    //   console.log('res', res);
+
+    //   if (res.status !== 200) {
+    //     window.location.href = '/auth/admin/login';
+    //   } else {
+    //     setIsValid(true);
+    //   }
+    // });
   }, []);
 
   return (

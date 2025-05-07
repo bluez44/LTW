@@ -54,16 +54,22 @@ if ($path === $url . '/login' && $method === 'POST') {
     sendContactForm();
 } elseif ($path === $url . '/get-10-questions' && $method === 'GET'){
     getQuestions();
+} elseif ($path === $url . '/get-all-questions' && $method === 'GET'){
+    getAllQuestions();
 } elseif ($path === $url . '/count' && $method === 'GET'){
     getNumberQuesions();
 } elseif ($path === $url . '/create-question' && $method === 'POST'){
     createQuestion();
+} elseif ($path === $url . '/update-question' && $method === 'POST'){
+    updateQuestion();
 } elseif ($path === $url . '/delete-question' && $method === 'GET'){
     deleteQuestion();
 } elseif ($path === $url . '/get-answers' && $method === 'GET'){
     getAnswersByQuestionId();
 } elseif ($path === $url . '/create-answer' && $method === 'POST'){
     createAnswer();
+} elseif ($path === $url . '/update-answer' && $method === 'POST'){
+    updateAnswer();
 } elseif ($path === $url . '/delete-answer' && $method === 'GET'){
     deleteAnswerById();
 } else {

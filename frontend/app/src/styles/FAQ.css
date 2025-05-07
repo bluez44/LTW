@@ -72,7 +72,7 @@ h2 {
 
 .banner-slide{
     flex-shrink: 0;
-    width: 1268px;
+    width: 100%;
     height: 100%;
     position: relative;
 }

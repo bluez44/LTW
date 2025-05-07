@@ -35,11 +35,11 @@ class UserModel {
         return $stmt->execute();
     }
 
-    public static function getUserFullNameByAcountId($account_id){
+    public static function getUserFullNameByUserId($user_id){
         global $conn;
-        $user_sql = "SELECT first_name, last_name FROM user WHERE account_id = ?";
+        $user_sql = "SELECT first_name, last_name FROM user WHERE id = ?";
         $user_stmt = $conn->prepare($user_sql);
-        $user_stmt->bind_param("i", $account_id);
+        $user_stmt->bind_param("i", $user_id);
         $user_stmt->execute();
         return $user_stmt->get_result();
     }
