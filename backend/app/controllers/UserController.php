@@ -5,7 +5,7 @@ function profile()
 {
     $user = getUserFromToken();
     if (!$user) {
-        // response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
+        response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
         return;
     }
 
@@ -15,6 +15,7 @@ function profile()
         'message' => 'Get profile success',
         'data' => [
             'user' => $data,
+            'test' => $user
         ]
     ], 200);
 }
@@ -72,6 +73,31 @@ function updateProfile() {
         } else {
             response_json(['message' => 'Cập nhật thông tin thất bại'], 500);
         }
+    }
+}
+
+function changePassword() {
+    $user = getUserFromToken();
+    if (!$user) {
+        response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
+        return;
+    }
+
+    $id = $user->id;
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $oldPassword = $data['current_pass'] ?? '';
+    $newPassword = $data['new_pass'] ?? '';
+
+    if(UserModel::checkPassword($id, $oldPassword)) {
+        if(UserModel::changePassword($id, $newPassword)) {
+            response_json(['message' => 'Đổi mật khẩu thành công'], 200);
+        } else {
+            response_json(['message' => 'Đổi mật khẩu thất bại'], 500);
+        }
+    } else {
+        response_json(['message' => 'Mật khẩu không đúng'], 500);        
     }
 }
 

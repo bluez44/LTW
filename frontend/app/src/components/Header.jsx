@@ -1,7 +1,7 @@
 import React, { use, useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { HiBars3 } from 'react-icons/hi2';
 import { IoCloseSharp, IoLogOut } from 'react-icons/io5';
@@ -16,6 +16,8 @@ import { getUserInfo } from '@/api';
 import '@/styles/Header.css';
 
 function Header() {
+  const navigate = useNavigate();
+
   const [isShowMenu, setIsShowMenu] = useState(false);
 
   const [pageTheme, setPageTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -245,6 +247,7 @@ function Header() {
                         if (res.status === 200) {
                           localStorage.removeItem('user');
                           setUserInfo(null);
+                          window.location.reload();
                         }
                       }}
                     >

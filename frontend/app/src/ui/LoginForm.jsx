@@ -29,9 +29,10 @@ function LoginForm() {
 
     const res = await login(data);
 
-    // console.log('res', res);
+    // console.log('res', res.response);
 
-    notify(res.status, res.message);
+    if (res.response) notify(res.response.data.status, res.response.data.message);
+    else notify(res.status, res.message);
 
     if (res.status == 200) {
       setTimeout(() => {

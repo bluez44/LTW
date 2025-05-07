@@ -1,0 +1,69 @@
+import React, { useState, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router';
+
+import ChangePassForm from '@/ui/ChangePassForm';
+
+import { getUserInfo } from '@/api';
+
+function ResetPassword() {
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await getUserInfo();
+      return res;
+    };
+
+    const res = fetchUser();
+    // console.log('res', res);
+
+    res
+      .then((res) => {
+        if (res.status === 200) {
+          setUserInfo(res.data.user);
+        } else {
+          navigate('/');
+        }
+      })
+      .catch((err) => console.log('err', err));
+  }, []);
+
+  return (
+    userInfo && (
+      <>
+        <ToastContainer />
+        <div className="d-flex flex-column justify-content-center">
+          <div
+            className="container d-flex flex-column justify-content-center align-items-center w-100"
+            style={{ minHeight: '80dvh' }}
+          >
+            <div className="auth_container d-flex flex-column gap-3 align-items-center">
+              <img
+                src="https://cdn-gg.vnggames.app/id/0.4.55/static/media/zing.fe2d7db500abe00a92627d5c2152fea5.svg"
+                width={100}
+                alt="zing"
+              />
+              <p className="fs-4 fw-bold">Thay đổi mật khẩu tài khoản</p>
+              <ChangePassForm />
+            </div>
+          </div>
+          <div
+            className="d-flex flex-column align-items-center justify-content-center w-100 auth_footer"
+            style={{ minHeight: '20dvh' }}
+          >
+            <p className="fs-6" style={{ color: '#767a7f' }}>
+              Terms and conditions
+            </p>
+            <p className="fs-5" style={{ color: '#b9bdc1' }}>
+              Copyright © 2022. VNGGames
+            </p>
+          </div>
+        </div>
+      </>
+    )
+  );
+}
+
+export default ResetPassword;

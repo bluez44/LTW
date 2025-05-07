@@ -13,7 +13,7 @@ export const instance = axios.create({
 });
 
 export const login = async ({ username, password }) => {
-  console.log(username, password);
+  // console.log(username, password);
 
   try {
     const response = await instance.post(`${API_URL}/login`, { username, password });
@@ -133,6 +133,16 @@ export const updateProfile = async (formData) => {
     return response.data;
   } catch (error) {
     // console.error("Update profile error:", error);
+    return error;
+  }
+};
+
+export const changePassword = async ({ current_pass, new_pass }) => {
+  try {
+    const response = await instance.post(`${API_URL}/profile/reset`, { current_pass, new_pass });
+    return response.data;
+  } catch (error) {
+    // console.error("Change password error:", error);
     return error;
   }
 };
