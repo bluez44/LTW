@@ -66,7 +66,7 @@ function Contact() {
   const filterForms = useMemo(() => {
     return contactForms.filter((contact) => {
       return (
-        contact?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact?.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contact?.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contact?.phone?.includes(searchTerm) ||
         contact?.status?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -80,6 +80,16 @@ function Contact() {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
+              <a
+                href="#"
+                className="burger-btn d-block d-xl-none"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('sidebar').classList.add('active');
+                }}
+              >
+                <i className="bi bi-justify fs-3"></i>
+              </a>
               <h4 className="card-title">Danh sách các liên hệ của người dùng</h4>
             </div>
             <div className="card-content">
@@ -101,7 +111,7 @@ function Contact() {
                       <input
                         type="text"
                         id="roundText"
-                        className="form-control round"
+                        className="form-control round w-100 w-xl-75"
                         placeholder="Tìm kiếm liên hệ của người dùng theo tên/email/số diện thoại hoặc theo trạng thái của đơn liên hệ"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}

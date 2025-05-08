@@ -16,6 +16,8 @@ require_once __DIR__ . '/../controllers/AnswerController.php';
 
 if ($path === $url . '/login' && $method === 'POST') {
     login();
+} elseif ($path === $url . '/auth' && $method === 'GET') {
+    auth();
 } elseif ($path === $url . '/register' && $method === 'POST') {
     register();
 } elseif ($path === $url . '/logout' && $method === 'POST') {

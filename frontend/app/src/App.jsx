@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router';
 
 import Layout from '@/components/Layout';
-import Homepge from '@/pages/Homepge'; 
+import Homepge from '@/pages/Homepge';
 import Login from '@/pages/auth/Login';
 import ForgotPassword from '@/pages/auth/Forgot-password';
 import AboutUs from '@/pages/AboutUs';
@@ -22,6 +22,8 @@ import News from '@/pages/Admin/News';
 import Products from '@/pages/Admin/Products';
 import AboutUsAdmin from '@/pages/Admin/AboutUsAdmin';
 
+import RouteProtect from '@/components/RouteProtect';
+
 function App() {
   return (
     <Routes>
@@ -31,11 +33,31 @@ function App() {
         <Route path="/products/*" element={<Product />} /> {/* Sử dụng wildcard để hỗ trợ sub-route */}
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/reset' element={<ResetPassword />} />
+        <Route
+          path="/profile"
+          element={
+            <RouteProtect role="user">
+              <Profile />
+            </RouteProtect>
+          }
+        />
+        <Route
+          path="/profile/reset"
+          element={
+            <RouteProtect role="user">
+              <ResetPassword />
+            </RouteProtect>
+          }
+        />
       </Route>
 
-      <Route element={<AdminLayout />}>
+      <Route
+        element={
+          <RouteProtect role="admin">
+            <AdminLayout />
+          </RouteProtect>
+        }
+      >
         <Route path="/admin" element={<Home />} />
         <Route path="/admin/contact" element={<Contact />} />
         <Route path="/admin/faq" element={<FAQs />} />

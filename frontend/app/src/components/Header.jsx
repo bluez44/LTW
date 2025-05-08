@@ -57,7 +57,7 @@ function Header() {
     };
 
     const res = fetchUser();
-    // console.log('res', res);
+    console.log('res', res);
 
     res.then((res) => {
       if (res.status === 200) {
