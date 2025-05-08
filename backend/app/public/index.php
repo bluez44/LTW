@@ -36,6 +36,15 @@ if ($path === $url . '/login' && $method === 'POST') {
     adminProfile();
 } elseif ($path === $url . '/admin/contact' && $method === 'GET') {
     getAllContacts();
+} elseif ($path === $url . '/admin/users' && $method === 'GET'){
+    getAllUsers();
+} elseif ($path === $url . '/admin/users' && $method === 'DELETE'){
+    $data = json_decode(file_get_contents("php://input"), true);
+    $id = $data['id'] ?? '';
+
+    if($id) {
+        deleteUserById($id);
+    }
 } elseif ($method === 'POST' && preg_match('#^' . preg_quote($url, '#') . '/admin/contact/(\d+)$#', $path, $matches)) {
     $id = (int)$matches[1];
 
@@ -76,6 +85,18 @@ if ($path === $url . '/login' && $method === 'POST') {
     updateAnswer();
 } elseif ($path === $url . '/delete-answer' && $method === 'GET'){
     deleteAnswerById();
+} elseif ($path === $url . '/missions' && $method === 'GET'){
+    getMission();
+} elseif ($path === $url . '/missions' && $method === 'POST'){
+    updateMission();
+} elseif ($path === $url . '/missions/add' && $method === 'POST'){
+    addMission();
+} elseif ($path === $url . '/missions/delete' && $method === 'DELETE'){
+    deleteMission();
+} elseif ($path === $url . '/menu-items' && $method === 'GET'){
+    getMenuItems();
+} elseif ($path === $url . '/sub-menu-items' && $method === 'GET'){
+    getSubMenuItems();
 } else {
     http_response_code(404);
     echo json_encode(['message' => 'Not Found ' . $path . " " . $method]);

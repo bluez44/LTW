@@ -6,6 +6,46 @@ CREATE TABLE Account (
     role VARCHAR(10) NOT NULL
 );
 
+CREATE TABLE Mission (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    icon VARCHAR(255)
+);
+
+CREATE TABLE Menu_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    link VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Submenu_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    link VARCHAR(255) NOT NULL,
+    menu_id INT,
+    FOREIGN KEY (menu_id) REFERENCES Menu_item(id)
+);
+
+INSERT INTO Menu_item(name, link) VALUES ("Về VNG", "/about-us");
+INSERT INTO Menu_item(name, link) VALUES ("Sản phẩm", "/products");
+INSERT INTO Menu_item(name, link) VALUES ("Tin tức", "/news");
+INSERT INTO Menu_item(name, link) VALUES ("Hỏi đáp", "/faq");
+INSERT INTO Menu_item(name, link) VALUES ("Liên hê", "/contact");
+
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Sứ mệnh", "#", 1);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Giá trị cốt lõi", "#", 1);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Cột mốc chính", "#", 1);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Ban lãnh đạo cấp cao", "#", 1);
+
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Trò chơi trực tuyến", "#", 2);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Zalo & AI", "#", 2);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Thanh toán và Tài chính", "#", 2);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("VNG Pay", "#", 2);
+
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Tin tức mới nhất", "#", 3);
+INSERT INTO Submenu_item(name, link, menu_id) VALUES ("Thư viện", "#", 3);
+
 CREATE TABLE User (
     password VARCHAR(255) NOT NULL,
     id INT AUTO_INCREMENT PRIMARY KEY,
