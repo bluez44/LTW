@@ -106,7 +106,19 @@ function Sidebar() {
           <ul className="menu">
             <li className="sidebar-title">Danh sách các trang quản lý</li>
 
-            {/* <li className="sidebar-title">Quản lý</li> */}
+            <li className={`sidebar-item ${pathname === 'home' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('home')} to={'/admin/home'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
+                <span>Nội dung trang chủ</span>
+              </Link>
+            </li>
+
+            <li className={`sidebar-item ${pathname === 'users' ? 'active' : ''}`}>
+              <Link onClick={(e) => setPathname('users')} to={'/admin/users'} className="sidebar-link">
+                <i className="bi bi-grid-fill"></i>
+                <span>Quản lý người dùng</span>
+              </Link>
+            </li>
 
             <li className={`sidebar-item ${pathname === 'contact' ? 'active' : ''}`}>
               <Link onClick={(e) => setPathname('contact')} to={'/admin/contact'} className="sidebar-link">
@@ -144,8 +156,8 @@ function Sidebar() {
             </li> */}
 
             <li className={`sidebar-item`}>
-              <div className="sidebar-link btn btn-danger" onClick={handleLogout}>
-                <i className="bi bi-grid-fill"></i>
+              <div className="sidebar-link btn btn-danger text-white" onClick={handleLogout}>
+                <i className="bi bi-grid-fill text-white"></i>
                 <span>Đăng xuất</span>
               </div>
             </li>

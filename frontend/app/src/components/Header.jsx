@@ -80,6 +80,7 @@ function Header() {
     items.forEach((item, index) => {
       if (item.link === pathName) {
         setActiveIndex(index);
+        document.title = `VNG - ${item.name}`;
       }
     });
   });
@@ -102,6 +103,7 @@ function Header() {
           to="/"
           onClick={() => {
             setActiveIndex(-1);
+            document.title = `VNG - Trang chủ`;
           }}
         >
           <span className="d-block" data-icon="vng">

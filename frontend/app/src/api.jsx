@@ -44,7 +44,7 @@ export const authUser = async () => {
     // console.error("Auth user error:", error);
     return error;
   }
-}
+};
 
 export const register = async (formData) => {
   try {
@@ -133,6 +133,26 @@ export const deleteContactForm = async (id) => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    const response = await instance.get(`${API_URL}/admin/users`);
+    return response.data;
+  } catch (error) {
+    // console.error("Get all users error:", error);
+    return error;
+  }
+};
+
+export const deleteUser = async (id) => {
+  try {
+    const response = await instance.delete(`${API_URL}/admin/users`, { data: { id } });
+    return response.data;
+  } catch (error) {
+    // console.error("Delete user error:", error);
+    return error;
+  }
+};
+
 export const updateProfile = async (formData) => {
   try {
     const response = await instance.post(`${API_URL}/profile`, formData, {
@@ -153,6 +173,66 @@ export const changePassword = async ({ current_pass, new_pass }) => {
     return response.data;
   } catch (error) {
     // console.error("Change password error:", error);
+    return error;
+  }
+};
+
+export const getAllMissions = async () => {
+  try {
+    const response = await instance.get(`${API_URL}/missions`);
+    return response.data;
+  } catch (error) {
+    // console.error("Get all missions error:", error);
+    return error;
+  }
+};
+
+export const addMission = async (mission) => {
+  try {
+    const response = await instance.post(`${API_URL}/missions/add`, mission);
+    return response.data;
+  } catch (error) {
+    // console.error("Add mission error:", error);
+    return error;
+  }
+};
+
+export const updateMission = async (mission) => {
+  try {
+    const response = await instance.post(`${API_URL}/missions`, mission);
+    return response.data;
+  } catch (error) {
+    // console.error("Update mission error:", error);
+    return error;
+  }
+};
+
+export const deleteMission = async (id) => {
+  try {
+    const response = await instance.delete(`${API_URL}/missions/delete`, { data: { id } });
+    return response.data;
+  } catch (error) {
+    // console.error("Delete mission error:", error);
+    return error;
+  }
+};
+
+export const getAllMenuItems = async () => {
+  try {
+    const response = await instance.get(`${API_URL}/menu-items`);
+    return response.data;
+  } catch (error) {
+    // console.error("Get all menu items error:", error);
+    return error;
+  }
+};
+
+export const getAllSubMenuItems = async () => {
+  try {
+    const response = await instance.get(`${API_URL}/sub-menu-items`);
+    return response.data;
+  } catch (error) {
+    // console.error("Get all sub menu items error:", error);
     return error;
   }
 };

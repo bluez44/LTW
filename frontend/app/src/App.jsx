@@ -21,6 +21,8 @@ import FAQs from '@/pages/Admin/FAQs';
 import News from '@/pages/Admin/News';
 import Products from '@/pages/Admin/Products';
 import AboutUsAdmin from '@/pages/Admin/AboutUsAdmin';
+import HomepageManage from '@/pages/Admin/HomepageManage';
+import ManageUser from '@/pages/Admin/ManageUser';
 
 import RouteProtect from '@/components/RouteProtect';
 
@@ -59,11 +61,13 @@ function App() {
         }
       >
         <Route path="/admin" element={<Home />} />
+        <Route path="/admin/home" element={<HomepageManage />} />
         <Route path="/admin/contact" element={<Contact />} />
         <Route path="/admin/faq" element={<FAQs />} />
         <Route path="/admin/news" element={<News />} />
         <Route path="/admin/products" element={<Products />} />
         <Route path="/admin/about-us" element={<AboutUsAdmin />} />
+        <Route path="/admin/users" element={<ManageUser />} />
       </Route>
 
       <Route path="/auth/login" element={<Login />} />
