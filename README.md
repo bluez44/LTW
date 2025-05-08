@@ -72,8 +72,8 @@ npm run dev
 | -------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Võ Lê Quang Vinh     | [github.com/bluez44](https://github.com/bluez44)                 | Designed and developed homepage, authentication, contact page, database schema, ERD, related APIs                         |
 | Trần Trung Nhựt      | [github.com/Tran-Trung-Nhut](https://github.com/Tran-Trung-Nhut) | Designed and developed company introduction page, Q&A page, database schema, ERD, related APIs                             |
-| Đậu Ngọc Quân        | [github.com/ngocquandau](https://github.com/ngocquandau)         | Designed and developed product introduction page, shopping cart, database schema, ERD, related APIs                        |
-| Nguyễn Vũ Quang Minh | [github.com/levanc](https://github.com/levanc)                   | Designed and developed company news page, database schema, ERD, related APIs                                               |
+| Đậu Ngọc Quân        | [github.com/ngocquandau](https://github.com/ngocquandau)         | Designed and developed product introduction page, shopping cart, related APIs                        |
+| Nguyễn Vũ Quang Minh | [github.com/levanc](https://github.com/levanc)                   | Designed and developed company news page, related APIs                                               |
 
 ---
 
