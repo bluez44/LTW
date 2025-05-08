@@ -20,7 +20,7 @@ function Sidebar() {
   };
 
   return (
-    <div id="sidebar">
+    <div id="sidebar" className="sidebar-desktop">
       <div className="sidebar-wrapper active">
         <div className="sidebar-header position-relative">
           <div className="d-flex justify-content-between align-items-center">
@@ -89,7 +89,13 @@ function Sidebar() {
                 ></path>
               </svg>
             </div>
-            <div className="sidebar-toggler x">
+            <div
+              className="sidebar-toggler x"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('sidebar').classList.remove('active');
+              }}
+            >
               <a href="#" className="sidebar-hide d-xl-none d-block">
                 <i className="bi bi-x bi-middle"></i>
               </a>
@@ -137,9 +143,9 @@ function Sidebar() {
               </Link>
             </li> */}
 
-            <li className={`sidebar-item `}>
-              <div className="sidebar-link btn btn-danger text-white" onClick={handleLogout}>
-                <i className="bi bi-grid-fill text-white"></i>
+            <li className={`sidebar-item`}>
+              <div className="sidebar-link btn btn-danger" onClick={handleLogout}>
+                <i className="bi bi-grid-fill"></i>
                 <span>Đăng xuất</span>
               </div>
             </li>

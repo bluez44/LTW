@@ -21,7 +21,7 @@ function ContactUs() {
       } else {
         setUserInfo(null);
       }
-    })
+    });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -40,6 +40,8 @@ function ContactUs() {
 
     res.then((res) => {
       notify(res.status, res.message);
+
+      e.target.reset();
     });
   };
 
@@ -114,7 +116,10 @@ function ContactUs() {
           />
         </div>
 
-        <button type="submit" className="text-uppercase btn btn-vng-primary text-white d-block mx-auto">
+        <button
+          type="submit"
+          className="text-uppercase btn btn-vng-primary border-vng-primary text-white d-block mx-auto"
+        >
           gửi tin nhắn
         </button>
       </form>

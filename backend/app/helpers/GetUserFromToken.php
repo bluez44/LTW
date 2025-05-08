@@ -11,12 +11,12 @@ function getUserFromToken()
 {
     global $JWT_SECRET;
     $token = $_COOKIE['token'] ?? '';
-    if (!$token) return null;
+    if (!$token) return response_json(['message' => 'Không có token hợp lệ'], 500);
 
     try {
         return JWT::decode($token, new Key($JWT_SECRET, 'HS256'));
     } catch (Exception $e) {
-        return null;
+        return response_json(['message' => 'Có lỗi xảy ra'], 500);
     }
 }
 

@@ -36,6 +36,16 @@ export const adminLogin = async ({ username, password }) => {
   }
 };
 
+export const authUser = async () => {
+  try {
+    const response = await instance.get(`${API_URL}/auth`);
+    return response.data;
+  } catch (error) {
+    // console.error("Auth user error:", error);
+    return error;
+  }
+}
+
 export const register = async (formData) => {
   try {
     const response = await instance.post(`${API_URL}/register`, formData, {
@@ -53,7 +63,7 @@ export const register = async (formData) => {
 export const logout = async () => {
   try {
     const response = await instance.post(`${API_URL}/logout`);
-    localStorage.removeItem('userInfo');
+    // localStorage.removeItem('userInfo');
     return response.data;
   } catch (error) {
     // console.error("Logout error:", error);

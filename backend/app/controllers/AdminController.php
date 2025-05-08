@@ -5,7 +5,7 @@ require_once __DIR__ . '/../models/contactFormModel.php';
 function adminProfile()
 {
     $admin = getUserFromToken();
-    if (!$admin) {
+    if (!$admin || $admin->role != 'admin') {
         // response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
         return;
     }
@@ -28,7 +28,7 @@ function adminProfile()
 
 function getAllContacts() {
     $admin = getUserFromToken();
-    if (!$admin) {
+    if (!$admin || $admin->role != 'admin') {
         response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
         return;
     }
@@ -51,7 +51,7 @@ function getAllContacts() {
 
 function updateContactStatus($id) {
     $admin = getUserFromToken();
-    if (!$admin) {
+    if (!$admin || $admin->role != 'admin') {
         response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
         return;
     }
@@ -89,7 +89,7 @@ function updateContactStatus($id) {
 
 function deleteContact($id) {
     $admin = getUserFromToken();
-    if (!$admin) {
+    if (!$admin || $admin->role != 'admin') {
         response_json(['message' => 'Token không hợp lệ hoặc không tồn tại'], 401);
         return;
     }
