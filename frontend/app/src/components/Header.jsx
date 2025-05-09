@@ -99,7 +99,7 @@ function Header() {
 
         <Link
           className="d-inline-block position-md-relative position-absolute mx-auto mx-md-0 start-0 end-0"
-          style={{ width: '60px' }}
+          style={{ maxWidth: '60px' }}
           to="/"
           onClick={() => {
             setActiveIndex(-1);
@@ -148,6 +148,15 @@ function Header() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              to={'/auth/login'}
+              className="position-relative lh-1 d-flex align-items-center justify-content-sm-center px-5 px-md-2 px-xl-4 w-100 text-md-vng-navbar text-black text-decoration-none bg-body"
+              style={{ height: '81px' }}
+            >
+              Đăng nhập
+            </Link>
+          </li>
         </ul>
 
         <div className="position-relative d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center h-100 gap-0 gap-md-3">
