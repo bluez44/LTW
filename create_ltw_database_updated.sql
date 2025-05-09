@@ -150,5 +150,8 @@ CREATE TABLE Patch_Order (
     created_at DATETIME,
     completed_at DATETIME,
     cart_id INT,
-    FOREIGN KEY (cart_id) REFERENCES Cart(id)
+    patch_count INT,
+    patch_id INT,
+    FOREIGN KEY (cart_id) REFERENCES Cart(id),
+    FOREIGN KEY (patch_id) REFERENCES Patch(id)
 );
