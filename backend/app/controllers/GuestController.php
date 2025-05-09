@@ -25,4 +25,49 @@ function sendContactForm(){
     }
 }
 
+function getMission() {
+    $missions = GuestModel::getAllMissions();
+
+    if(!$missions) {
+        response_json([
+            'message' => 'Không tìm thấy danh sách'
+        ], 404);
+    }
+
+    response_json([
+        'data' => $missions,
+        'message' => 'Lấy danh sứ mệnh thành công'
+    ], 200);
+}
+
+function getMenuItems() {
+    $menuItems = GuestModel::getAllMenuItems();
+
+    if(!$menuItems) {
+        response_json([
+            'message' => 'Không tìm thấy danh sách'
+        ], 404);
+    }
+
+    response_json([
+        'data' => $menuItems,
+        'message' => 'Lấy danh sách menu thành công'
+    ], 200);
+}
+
+function getSubMenuItems() {
+    $subMenuItems = GuestModel::getAllSubMenuItems();
+
+    if(!$subMenuItems) {
+        response_json([
+            'message' => 'Không tìm thấy danh sách'
+        ], 404);
+    }
+
+    response_json([
+        'data' => $subMenuItems,
+        'message' => 'Lấy danh sách sub menu thành công'
+    ], 200);
+}
+
 ?>

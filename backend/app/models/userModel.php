@@ -2,6 +2,20 @@
 require_once __DIR__ . '/../config/database.php';
 
 class UserModel {
+    public static function getAllUsers() {
+        global $conn;
+        $stmt = $conn->prepare("SELECT id, email, user_name, first_name, last_name, phone_number, birth_day, avatar_url FROM user");
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public static function deleteUser($id) {
+        global $conn;
+        $stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        return $stmt->execute();
+    }
+
     public static function findUserByUserName($userName) {
         global $conn;
         $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? OR user_name = ? LIMIT 1");

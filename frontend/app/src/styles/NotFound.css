@@ -1,0 +1,11 @@
+.notfound-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+  }

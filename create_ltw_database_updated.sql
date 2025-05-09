@@ -112,3 +112,44 @@ CREATE TABLE Patch_Order (
     cart_id INT,
     FOREIGN KEY (cart_id) REFERENCES Cart(id)
 );
+
+
+ALTER TABLE Patch_Order
+ADD full_name VARCHAR(100),
+ADD shipping_address VARCHAR(255),
+ADD phone VARCHAR(20);
+
+
+-- Tạo bảng Cart_Items để lưu chi tiết giỏ hàng
+CREATE TABLE IF NOT EXISTS Cart_Items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    patch_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (cart_id) REFERENCES Cart(id) ON DELETE CASCADE,
+    FOREIGN KEY (patch_id) REFERENCES Patch(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_cart_patch (cart_id, patch_id)
+);
+
+
+
+-- Cập nhật bảng patch_order để lưu thông tin giao hàng
+ALTER TABLE patch_order
+    ADD COLUMN receiver_name VARCHAR(255) NOT NULL,
+    ADD COLUMN phone VARCHAR(20) NOT NULL,
+    ADD COLUMN address TEXT NOT NULL,
+    ADD COLUMN total_payment DECIMAL(15,2) NOT NULL DEFAULT 0.00;
+
+
+
+CREATE TABLE order_item (
+    order_id INT NOT NULL,
+    patch_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (order_id, patch_id),
+    FOREIGN KEY (order_id) REFERENCES patch_order(id) ON DELETE CASCADE,
+    FOREIGN KEY (patch_id) REFERENCES patch(id) ON DELETE CASCADE
+);
+

@@ -11,6 +11,13 @@ $JWT_SECRET = $env['JWT_SECRET'];
 
 use Firebase\JWT\JWT;
 
+function auth() {
+    $user = getUserFromToken();
+    if ($user) {
+        return response_json(['data' => $user, 'message' => 'Xác thực token thành công'], 200);
+    }
+    return response_json(['message' => 'Không có token hợp lệ'], 500);
+}
 
 function login()
 {
@@ -25,7 +32,8 @@ function login()
             'id' => $user['id'],
             'email' => $user['email'],
             'iat' => time(),
-            'exp' => time() + (60 * 60 * 24)
+            'exp' => time() + (60 * 60 * 24),
+            'role' => 'user',
         ];
 
         $jwt = JWT::encode($payload, $JWT_SECRET, 'HS256');
@@ -62,7 +70,8 @@ function adminLogin()
         $payload = [
             'id' => $user['id'],
             'iat' => time(),
-            'exp' => time() + (60 * 60 * 24)
+            'exp' => time() + (60 * 60 * 24),
+            'role' => 'admin',
         ];
 
         $jwt = JWT::encode($payload, $JWT_SECRET, 'HS256');
