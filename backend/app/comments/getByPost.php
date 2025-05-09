@@ -30,8 +30,6 @@ $result = $stmt->get_result();
 
 $comments = [];
 while ($row = $result->fetch_assoc()) {
-    $row['likes'] = 0;
-    $row['replies'] = [];
     $comments[] = $row;
 }
 
